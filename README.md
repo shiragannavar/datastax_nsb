@@ -35,6 +35,20 @@ This script will install and configure a self contained single nod benchmarking 
        datasource name, which is the default in grafana. If you choose a different datasource name, you
        will need to replace the name 'prometheus' in the example dashboard json file.
 
+## EC2 Provision
+
+### Choose an unbuntu flavor - tested with 22.04
+
+![Ubuntu version](./img/Ubuntu2204.png)
+
+### Choose an instance type - tested with i4, must support nvme devices
+
+![Instance Type](./img/EC2_i4.png)
+
+### Create 2 addtional volumes
+
+![io1 Volumes](./img/nvme_volumes.png)
+
 ## Nosqlbench examples:
    - rpelace localIP with the local ip address of your vm
 
