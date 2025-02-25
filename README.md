@@ -17,8 +17,8 @@ This script will install and configure a self contained single nod benchmarking 
 <ol>
   <li>chmod +x install_nsb_single_node_aws_i4.sh</li>
   <li>./install_nsb_single_node_aws_i4.sh INSTALL</li>
-  <li>>./install_nsb_single_node_aws_i4.sh VERIFY</li>
-</ol?
+  <li>./install_nsb_single_node_aws_i4.sh VERIFY</li>
+</ol>
 >
 ## Next steps - aka things you can't do in the script:
 
