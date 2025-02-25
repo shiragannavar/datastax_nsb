@@ -1,0 +1,1865 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "grafana",
+          "uid": "-- Grafana --"
+        },
+        "enable": false,
+        "hide": true,
+        "iconColor": "yellow",
+        "name": "Annotations & Alerts",
+        "target": {
+          "limit": 100,
+          "matchAny": true,
+          "tags": [],
+          "type": "dashboard"
+        },
+        "type": "dashboard"
+      },
+      {
+        "datasource": {
+          "type": "datasource",
+          "uid": "grafana"
+        },
+        "enable": false,
+        "iconColor": "blue",
+        "name": "SCENARIO",
+        "target": {
+          "limit": 100,
+          "matchAny": false,
+          "tags": [
+            "layer:Scenario"
+          ],
+          "type": "tags"
+        }
+      },
+      {
+        "datasource": {
+          "type": "datasource",
+          "uid": "grafana"
+        },
+        "enable": false,
+        "iconColor": "super-light-yellow",
+        "name": "ACTIVITY",
+        "target": {
+          "refId": "Anno",
+          "tags": [
+            "layer:Activity"
+          ],
+          "type": "tags"
+        }
+      }
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 1,
+  "id": 24,
+  "links": [],
+  "liveNow": true,
+  "panels": [
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "id": 44,
+      "panels": [],
+      "title": "Vendor:$vendor Instance:$instance Scenario:$scenario Node:$node Activity:$activity K:$k Op:$op ",
+      "type": "row"
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 1
+      },
+      "id": 48,
+      "panels": [],
+      "title": "Relevance",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus_oss"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "max": 1,
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 12,
+        "x": 0,
+        "y": 2
+      },
+      "id": 49,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": false
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus_oss"
+          },
+          "editorMode": "code",
+          "expr": "{__name__=~\"recall.*\",instance=~\"$instance\",job=\"nosqlbench\",scenario=~\"$scenario\",activity=~\"$activity\",k=~\"$k\",target=~\"$target\"}",
+          "instant": false,
+          "range": true,
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus_oss"
+          },
+          "editorMode": "code",
+          "expr": "{__name__=~\"recall_100_w.*\",instance=~\"$instance\",job=\"nosqlbench\",scenario=~\"$scenario\",activity=~\"$activity\",k=~\"$k\",target=~\"$target\"}",
+          "hide": false,
+          "instant": false,
+          "range": true,
+          "refId": "B"
+        }
+      ],
+      "title": "Recall",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus_oss"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "max": 1,
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 12,
+        "x": 12,
+        "y": 2
+      },
+      "id": 50,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": false
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus_oss"
+          },
+          "editorMode": "code",
+          "expr": "{__name__=~\"precision.*\",instance=~\"$instance\",job=\"nosqlbench\",scenario=~\"$scenario\",activity=~\"$activity\",k=~\"$k\",target=~\"$target\"}",
+          "instant": false,
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Precision",
+      "type": "timeseries"
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 7
+      },
+      "id": 3,
+      "panels": [],
+      "title": "NB5 Diagnostics",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus_oss"
+      },
+      "description": "This view shows the current cycle progress in terms of cycles values dispensed to threads and a count of those which have been fully processed.\n\n__Dispatched cycles__ are those which have been allocated to activity threads to process. __Retired cycles__ are those which have not been retired or completed. \n\nThe difference between the two represents work which is subscribed by activity threads but not yet complete.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "cycles retired",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 70,
+            "gradientMode": "opacity",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "decimals": 0,
+          "mappings": [],
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "cycle"
+            },
+            "properties": [
+              {
+                "id": "custom.axisPlacement",
+                "value": "right"
+              },
+              {
+                "id": "custom.axisLabel",
+                "value": "cycles dispatched"
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 6,
+        "x": 0,
+        "y": 8
+      },
+      "id": 10,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": false
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus_oss"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "cycles_servicetime_total{job=\"nosqlbench\",instance=~\"$instance\",scenario=~\"$scenario\",activity=~\"$activity\",node=~\"$node\",target=~\"$target\"}",
+          "format": "time_series",
+          "instant": false,
+          "intervalFactor": 1,
+          "legendFormat": "{{target}} {{scenario}} {{node}} retired",
+          "range": true,
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus_oss"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "cycle{job=\"nosqlbench\",instance=~\"$instance\",scenario=~\"$scenario\",activity=~\"$activity\",node=~\"$node\",target=~\"$target\"}",
+          "format": "time_series",
+          "hide": false,
+          "instant": false,
+          "intervalFactor": 1,
+          "legendFormat": "{{target}}-{{node}} dispatched",
+          "range": true,
+          "refId": "B"
+        }
+      ],
+      "title": "Cycles V:$vendor S:$scenario A:$activity",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus_oss"
+      },
+      "description": "These two metrics show the 1-minute averaged ops per second for all ops (successes and errors) and succesful ops (no errors during execution) separately.\\n\\nWhen there are no errors, these metrics should be the same. When there are errors, there will be a difference. In that case, you can look at the error metrics to learn more about what is happening.\n\nBy comparing these two metrics for any activity, you have a quick first-glance sanity check that your tests are configured properly and\\nthat there are no serious configuration or resource issues. In addition, this is the primary throughput metric.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 70,
+            "gradientMode": "opacity",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "ops"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 6,
+        "x": 6,
+        "y": 8
+      },
+      "id": 1,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": false
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "asc"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus_oss"
+          },
+          "editorMode": "code",
+          "expr": "avg_over_time(result_1mRate{job=\"nosqlbench\", instance=~\"$instance\", scenario=~\"$scenario\", activity=~\"$activity\",target=~\"$target\"}[1m])",
+          "format": "time_series",
+          "hide": false,
+          "instant": false,
+          "intervalFactor": 1,
+          "legendFormat": "{{target}}-{{dataset}}-{{scenario}}-{{activity}}-{{node}}-ALL",
+          "range": true,
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus_oss"
+          },
+          "editorMode": "code",
+          "expr": "avg_over_time(result_success_1mRate{job=\"nosqlbench\", instance=~\"$instance\", scenario=~\"$scenario\", activity=~\"$activity\",target=~\"$target\"}[1m])",
+          "format": "time_series",
+          "hide": false,
+          "instant": false,
+          "intervalFactor": 1,
+          "legendFormat": "{{target}}-{{dataset}}-{{scenario}}-{{activity}}-{{node}}-OK",
+          "range": true,
+          "refId": "B"
+        }
+      ],
+      "title": "Ops V:$vendor S:$scenario A:$activity",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus_oss"
+      },
+      "description": "The tries distribution is an HDR histogram which represents how many times an operation was submitted. In a well balanced system, tries should be 1 across the board.\n\nEvery operation which is executed within NoSQLBench should have a `tries` metric. For example, with CQL, the number of times an operation is submitted before it is succesful is ideally 1. If you are overloading your target system, thus forcing resource contention, you may see operations timeout.\n\n\nBy default, NoSQLBench will try up to 10 times to submit operations before giving up and throwing an error for an operation.\n\nThe tries metric can be used as a low-noise indicator of system saturation. For example, if you are running a system marginally beyond its capacity, the tries for operations will go above 1 at the higher percentiles such as P99. If you increase the load even further, more retries will be needed and less work will be completed, thus showing higher retries at even lower percentiles, like P95, for example.\n\nAs such, you can use the tries metric as an indicator of relative saturation.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 70,
+            "gradientMode": "opacity",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "decimals": 0,
+          "mappings": [],
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 6,
+        "x": 12,
+        "y": 8
+      },
+      "id": 6,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": false
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus_oss"
+          },
+          "editorMode": "code",
+          "expr": "tries_bucket{job=\"nosqlbench\",instance=~\"$instance\",scenario=~\"$scenario\",activity=~\"$activity\",node=~\"$node\",target=~\"$target\"}",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "{{target}}-{{scenario}}-{{node}}-{{activity}}-{{le}}",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Tries V:$vendor S:$scenario A:$activity",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus_oss"
+      },
+      "description": "When an exception is caught and counted in a scenario, a specially named metric is emited which includes a simplified name of the error type.\n\nEach of these metrics is created as needed in the NoSQLBench runtime.\n\nThese metrics are formated with a name pattern of `errorcounts.NAME` where NAME is the simple name of the exception class which was caught during the operation. For example, For an activity named `foo``, you would expect an exception named `FooTimeoutException` to be shown with a metric name of ... `foo.errorcounts.FooTimeoutException`",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 6,
+        "x": 18,
+        "y": 8
+      },
+      "id": 139,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": false
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus_oss"
+          },
+          "editorMode": "code",
+          "expr": "{__name__=~\"errors_.*_total\",job=\"nosqlbench\",activity=~\"$activity\",instance=~\"$instance\",scenario=~\"$scenario\",target=~\"$target\"}",
+          "instant": false,
+          "legendFormat": "{{target}}-{{__name__}}",
+          "range": true,
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus_oss"
+          },
+          "editorMode": "code",
+          "expr": "{__name__=~\"errors_ALL_total\", job=\"nosqlbench\", activity=~\"$activity\", instance=~\"$instance\", scenario=~\"$scenario\",target=~\"$target\"}",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "{{target}}-{{node}}-{{__name__}}",
+          "range": true,
+          "refId": "B"
+        }
+      ],
+      "title": "Errors V:$vendor S:$scenario A:$activity",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus_oss"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "pending & complete ops",
+            "axisPlacement": "auto",
+            "axisSoftMin": 0,
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 70,
+            "gradientMode": "opacity",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "ops"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": "/THREADS|ACTIVE/"
+            },
+            "properties": [
+              {
+                "id": "custom.axisPlacement",
+                "value": "right"
+              },
+              {
+                "id": "custom.axisSoftMin",
+                "value": 0
+              },
+              {
+                "id": "unit",
+                "value": "none"
+              },
+              {
+                "id": "custom.axisLabel",
+                "value": "active ops & threads"
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 6,
+        "x": 0,
+        "y": 13
+      },
+      "id": 159,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": false
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "desc"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus_oss"
+          },
+          "editorMode": "code",
+          "expr": "ops_pending{instance=~\"$instance\",scenario=~\"$scenario\",activity=~\"$activity\"}",
+          "format": "time_series",
+          "hide": false,
+          "instant": false,
+          "intervalFactor": 1,
+          "legendFormat": "{{workload}}-{{scenario}}-{{activity}}-{{target}}-{{dataset}}-{{dimensions}} PENDING OPS",
+          "range": true,
+          "refId": "B"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus_oss"
+          },
+          "editorMode": "code",
+          "expr": "ops_complete{instance=~\"$instance\",scenario=~\"$scenario\",activity=~\"$activity\"}",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "{{workload}}-{{scenario}}-{{activity}}-{{target}}-{{dataset}}-{{dimensions}} COMPLETE OPS",
+          "range": true,
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus_oss"
+          },
+          "editorMode": "code",
+          "expr": "ops_active{instance=~\"$instance\",scenario=~\"$scenario\",activity=~\"$activity\"}",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "{{workload}}-{{scenario}}-{{activity}}-{{target}}-{{dataset}}-{{dimensions}} ACTIVE OPS",
+          "range": true,
+          "refId": "E"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus_oss"
+          },
+          "editorMode": "code",
+          "expr": "threads{workload=~\"$workload\", activity=~\"$activity\", instance=~\"$instance\", session=~\"$session\", scenario=~\"$scenario\", target=~\"$target\", container=~\"$container\"}",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "{{workload}}-{{scenario}}-{{activity}}-{{target}}-{{dataset}}-{{dimensions}} THREADS",
+          "range": true,
+          "refId": "C"
+        }
+      ],
+      "title": "OPS & THREADS [$scenario-$activity-$target]",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus_oss"
+      },
+      "description": "The service time distribution is an HDR histogram that represents the time elapsed from when an operation is submitted for execution to when its result has been received.\n\nFrom the vantage point of the NoSQLBench runtime, this is a client-side metric. Thus, the service time captures the processing time that an application would see, including driver logic, wire time (transport), and server-side processing.\n\nThis metric does not include the waittime or the responsetime metrics. These metrics are only meaningful (and provided) when a `cyclerate=` is provided to an activity. When computing the responsetime metric, the servicetime is added to the waittime for a given operation.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 70,
+            "gradientMode": "opacity",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "ns"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": "/P95.*/"
+            },
+            "properties": [
+              {
+                "id": "custom.lineWidth",
+                "value": 3
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": "/P99.*/"
+            },
+            "properties": [
+              {
+                "id": "custom.lineWidth",
+                "value": 1
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 6,
+        "x": 6,
+        "y": 13
+      },
+      "id": 5,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": false
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "asc"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus_oss"
+          },
+          "editorMode": "code",
+          "expr": "result_success_bucket{job=\"nosqlbench\",instance=~\"$instance\",scenario=~\"$scenario\",activity=~\"$activity\",node=~\"$node\",target=~\"$target\"}",
+          "format": "time_series",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "{{target}}-{{scenario}}-{{activity}}-{{dataset}}-{{le}}",
+          "range": true,
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus_oss"
+          },
+          "editorMode": "code",
+          "expr": "result_success_bucket{job=\"nosqlbench\",instance=~\"$instance\",scenario=~\"$scenario\",activity=~\"$activity\",node=~\"$node\",target=~\"$target\",le=\"0.95\"}",
+          "format": "time_series",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "P95-{{target}}-{{scenario}}-{{activity}}-{{dataset}}-{{le}}",
+          "range": true,
+          "refId": "B"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus_oss"
+          },
+          "editorMode": "code",
+          "expr": "result_success_bucket{job=\"nosqlbench\",instance=~\"$instance\",scenario=~\"$scenario\",activity=~\"$activity\",node=~\"$node\",target=~\"$target\",le=\"0.99\"}",
+          "format": "time_series",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "P99-{{target}}-{{scenario}}-{{activity}}-{{dataset}}-{{le}}",
+          "range": true,
+          "refId": "C"
+        }
+      ],
+      "title": "SvcTime V:$vendor S:$scenario A:$activity",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus_oss"
+      },
+      "description": "The service time distribution is an HDR histogram that represents the time elapsed from when an operation is submitted for execution to when its result has been received.\n\nFrom the vantage point of the NoSQLBench runtime, this is a client-side metric. Thus, the service time captures the processing time that an application would see, including driver logic, wire time (transport), and server-side processing.\n\nThis metric does not include the waittime or the responsetime metrics. These metrics are only meaningful (and provided) when a `cyclerate=` is provided to an activity. When computing the responsetime metric, the servicetime is added to the waittime for a given operation.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 70,
+            "gradientMode": "opacity",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "ns"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 6,
+        "x": 12,
+        "y": 13
+      },
+      "id": 120,
+      "interval": "1m",
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": false
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "asc"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus_oss"
+          },
+          "editorMode": "code",
+          "expr": "result_success_bucket{job=\"nosqlbench\",instance=~\"$instance\",scenario=~\"$scenario\",activity=~\"$activity\",node=~\"$node\",target=~\"$target\"}",
+          "format": "time_series",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "{{target}}-{{scenario}}-{{activity}}-{{dataset}}-{{le}}",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "SvcTime/1m V:$vendor S:$scenario A:$activity",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus_oss"
+      },
+      "description": "This panel shows the number of cycles remaining, pending, and complete for a given activity",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "pending + complete",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineStyle": {
+              "fill": "solid"
+            },
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "ops_active"
+            },
+            "properties": [
+              {
+                "id": "custom.axisPlacement",
+                "value": "right"
+              },
+              {
+                "id": "custom.axisLabel",
+                "value": "active"
+              },
+              {
+                "id": "custom.lineWidth",
+                "value": 1
+              },
+              {
+                "id": "custom.drawStyle",
+                "value": "line"
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 6,
+        "x": 18,
+        "y": 13
+      },
+      "id": 17,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": false
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus_oss"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "ops_pending{job=\"nosqlbench\",instance=~\"$instance\",scenario=~\"$scenario\",activity=~\"$activity\",node=~\"$node\",target=~\"$target\"}",
+          "instant": false,
+          "legendFormat": "{{target}}-{{node}}-pending",
+          "range": true,
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus_oss"
+          },
+          "editorMode": "code",
+          "expr": "ops_active{job=\"nosqlbench\",instance=~\"$instance\",scenario=~\"$scenario\",activity=~\"$activity\",node=~\"$node\",target=~\"$target\"}",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "{{target}}-{{node}}-active",
+          "range": true,
+          "refId": "B"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus_oss"
+          },
+          "editorMode": "code",
+          "expr": "ops_complete{job=\"nosqlbench\",instance=~\"$instance\",scenario=~\"$scenario\",activity=~\"$activity\",node=~\"$node\",target=~\"$target\"}",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "{{target}}-{{node}}-complete",
+          "range": true,
+          "refId": "C"
+        }
+      ],
+      "title": "Progress V:$vendor S:$scenario A:$activity",
+      "type": "timeseries"
+    },
+    {
+      "collapsed": true,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 18
+      },
+      "id": 22,
+      "panels": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus_oss"
+          },
+          "description": "This is a view of successful operations for a specific op:\n- op: $op\n- scenario: $scenario\n- activity: $activity",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "service time",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 70,
+                "gradientMode": "opacity",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "min": 0,
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green"
+                  }
+                ]
+              },
+              "unit": "ns"
+            },
+            "overrides": [
+              {
+                "matcher": {
+                  "id": "byRegexp",
+                  "options": "/.*rate.*/"
+                },
+                "properties": [
+                  {
+                    "id": "custom.axisPlacement",
+                    "value": "right"
+                  },
+                  {
+                    "id": "custom.axisLabel",
+                    "value": "rate"
+                  },
+                  {
+                    "id": "unit",
+                    "value": "ops"
+                  }
+                ]
+              }
+            ]
+          },
+          "gridPos": {
+            "h": 4,
+            "w": 12,
+            "x": 0,
+            "y": 19
+          },
+          "id": 23,
+          "options": {
+            "legend": {
+              "calcs": [],
+              "displayMode": "list",
+              "placement": "bottom",
+              "showLegend": false
+            },
+            "tooltip": {
+              "mode": "multi",
+              "sort": "asc"
+            }
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "prometheus_oss"
+              },
+              "editorMode": "code",
+              "expr": "{__name__=~\"successfor_.*_bucket\",job=\"nosqlbench\", instance=~\"$instance\", scenario=~\"$scenario\", activity=~\"$activity\", op=~\"$op\"}",
+              "format": "time_series",
+              "hide": false,
+              "instant": false,
+              "intervalFactor": 1,
+              "legendFormat": "{{node}}-{{op}}-success-{{le}}",
+              "range": true,
+              "refId": "A"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "prometheus_oss"
+              },
+              "editorMode": "code",
+              "expr": "{__name__=~\"successfor_.*1mRate\",job=\"nosqlbench\", instance=~\"$instance\", scenario=~\"$scenario\", activity=~\"$activity\", op=~\"$op\"}",
+              "format": "time_series",
+              "hide": false,
+              "instant": false,
+              "intervalFactor": 1,
+              "legendFormat": "{{op}}-1mrate",
+              "range": true,
+              "refId": "C"
+            }
+          ],
+          "title": "SUCCESSES for $op [$scenario $activity]",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus_oss"
+          },
+          "description": "These two metrics show the 1-minute averaged ops per second for all ops (successes and errors) and succesful ops (no errors during execution) separately.\\n\\nWhen there are no errors, these metrics should be the same. When there are errors, there will be a difference. In that case, you can look at the error metrics to learn more about what is happening.\n\nBy comparing these two metrics for any activity, you have a quick first-glance sanity check that your tests are configured properly and\\nthat there are no serious configuration or resource issues. In addition, this is the primary throughput metric.",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "erred service time",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 70,
+                "gradientMode": "opacity",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "min": 0,
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green"
+                  }
+                ]
+              },
+              "unit": "ns"
+            },
+            "overrides": [
+              {
+                "matcher": {
+                  "id": "byRegexp",
+                  "options": "/.*rate.*/"
+                },
+                "properties": [
+                  {
+                    "id": "custom.axisLabel",
+                    "value": "error rate"
+                  },
+                  {
+                    "id": "custom.axisPlacement",
+                    "value": "right"
+                  },
+                  {
+                    "id": "unit",
+                    "value": "cps"
+                  }
+                ]
+              }
+            ]
+          },
+          "gridPos": {
+            "h": 4,
+            "w": 12,
+            "x": 12,
+            "y": 19
+          },
+          "id": 24,
+          "options": {
+            "legend": {
+              "calcs": [],
+              "displayMode": "list",
+              "placement": "bottom",
+              "showLegend": false
+            },
+            "tooltip": {
+              "mode": "multi",
+              "sort": "asc"
+            }
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "prometheus_oss"
+              },
+              "editorMode": "code",
+              "expr": "{__name__=~\"errorsfor_.*_bucket\",job=\"nosqlbench\", instance=~\"$instance\", scenario=~\"$scenario\", activity=~\"$activity\",op=~\"$op\"}",
+              "format": "time_series",
+              "hide": false,
+              "instant": false,
+              "intervalFactor": 1,
+              "legendFormat": "{{node}}-{{op}}-errors-{{le}}",
+              "range": true,
+              "refId": "B"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "prometheus_oss"
+              },
+              "editorMode": "code",
+              "expr": "{__name__=~\"errorsfor_.*1mRate\",job=\"nosqlbench\", instance=~\"$instance\", scenario=~\"$scenario\", activity=~\"$activity\", op=~\"$op\"}",
+              "hide": false,
+              "instant": false,
+              "legendFormat": "{{op}}-1m error rate",
+              "range": true,
+              "refId": "A"
+            }
+          ],
+          "title": "ERRORS for $op [$scenario $activity]",
+          "type": "timeseries"
+        }
+      ],
+      "repeat": "op",
+      "repeatDirection": "h",
+      "title": "Specific Ops [$op]",
+      "type": "row"
+    }
+  ],
+  "refresh": "10s",
+  "schemaVersion": 38,
+  "style": "dark",
+  "tags": [],
+  "templating": {
+    "list": [
+      {
+        "allValue": ".*",
+        "current": {
+          "selected": false,
+          "text": "All",
+          "value": "$__all"
+        },
+        "datasource": {
+          "type": "prometheus",
+          "uid": "prometheus_oss"
+        },
+        "definition": "label_values(instance)",
+        "hide": 0,
+        "includeAll": true,
+        "label": "instance",
+        "multi": true,
+        "name": "instance",
+        "options": [],
+        "query": {
+          "query": "label_values(instance)",
+          "refId": "PrometheusVariableQueryEditor-VariableQuery"
+        },
+        "refresh": 2,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "allValue": ".*",
+        "current": {
+          "selected": true,
+          "text": [
+            "All"
+          ],
+          "value": [
+            "$__all"
+          ]
+        },
+        "datasource": {
+          "type": "prometheus",
+          "uid": "prometheus_oss"
+        },
+        "definition": "label_values({instance=~\"$instance\"},scenario)",
+        "hide": 0,
+        "includeAll": true,
+        "label": "scenario",
+        "multi": true,
+        "name": "scenario",
+        "options": [],
+        "query": {
+          "query": "label_values({instance=~\"$instance\"},scenario)",
+          "refId": "PrometheusVariableQueryEditor-VariableQuery"
+        },
+        "refresh": 2,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "allValue": ".*",
+        "current": {
+          "selected": true,
+          "text": [
+            "All"
+          ],
+          "value": [
+            "$__all"
+          ]
+        },
+        "datasource": {
+          "type": "prometheus",
+          "uid": "prometheus_oss"
+        },
+        "definition": "label_values({instance=~\"$instance\"},vendor)",
+        "hide": 0,
+        "includeAll": true,
+        "label": "Vendor",
+        "multi": true,
+        "name": "vendor",
+        "options": [],
+        "query": {
+          "query": "label_values({instance=~\"$instance\"},vendor)",
+          "refId": "PrometheusVariableQueryEditor-VariableQuery"
+        },
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 1,
+        "type": "query"
+      },
+      {
+        "current": {
+          "selected": true,
+          "text": [
+            "All"
+          ],
+          "value": [
+            "$__all"
+          ]
+        },
+        "datasource": {
+          "type": "prometheus",
+          "uid": "prometheus_oss"
+        },
+        "definition": "label_values({instance=~\"$instance\"},node)",
+        "hide": 0,
+        "includeAll": true,
+        "label": "node",
+        "multi": true,
+        "name": "node",
+        "options": [],
+        "query": {
+          "query": "label_values({instance=~\"$instance\"},node)",
+          "refId": "PrometheusVariableQueryEditor-VariableQuery"
+        },
+        "refresh": 2,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 3,
+        "type": "query"
+      },
+      {
+        "allValue": ".*",
+        "current": {
+          "selected": true,
+          "text": [
+            "All"
+          ],
+          "value": [
+            "$__all"
+          ]
+        },
+        "datasource": {
+          "type": "prometheus",
+          "uid": "prometheus_oss"
+        },
+        "definition": "label_values({instance=~\"$instance\",scenario=~\"$scenario\"},activity)",
+        "hide": 0,
+        "includeAll": true,
+        "label": "activity",
+        "multi": true,
+        "name": "activity",
+        "options": [],
+        "query": {
+          "query": "label_values({instance=~\"$instance\",scenario=~\"$scenario\"},activity)",
+          "refId": "PrometheusVariableQueryEditor-VariableQuery"
+        },
+        "refresh": 2,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 6,
+        "type": "query"
+      },
+      {
+        "allValue": ".*",
+        "current": {
+          "selected": false,
+          "text": "All",
+          "value": "$__all"
+        },
+        "datasource": {
+          "type": "prometheus",
+          "uid": "prometheus_oss"
+        },
+        "definition": "label_values({instance=~\"$instance\"},k)",
+        "hide": 0,
+        "includeAll": true,
+        "label": "K",
+        "multi": false,
+        "name": "k",
+        "options": [],
+        "query": {
+          "query": "label_values({instance=~\"$instance\"},k)",
+          "refId": "PrometheusVariableQueryEditor-VariableQuery"
+        },
+        "refresh": 2,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 6,
+        "type": "query"
+      },
+      {
+        "allValue": ".*",
+        "current": {
+          "selected": true,
+          "text": [
+            "All"
+          ],
+          "value": [
+            "$__all"
+          ]
+        },
+        "datasource": {
+          "type": "prometheus",
+          "uid": "prometheus_oss"
+        },
+        "definition": "label_values({instance=~\"$instance\",scenario=~\"$scenario\"},op)",
+        "hide": 0,
+        "includeAll": true,
+        "label": "Op",
+        "multi": true,
+        "name": "op",
+        "options": [],
+        "query": {
+          "query": "label_values({instance=~\"$instance\",scenario=~\"$scenario\"},op)",
+          "refId": "PrometheusVariableQueryEditor-VariableQuery"
+        },
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "allValue": ".*",
+        "current": {
+          "selected": true,
+          "text": [
+            "All"
+          ],
+          "value": [
+            "$__all"
+          ]
+        },
+        "datasource": {
+          "type": "prometheus",
+          "uid": "prometheus_oss"
+        },
+        "definition": "label_values({instance=~\"$instance\"},dataset)",
+        "hide": 0,
+        "includeAll": true,
+        "label": "Dataset",
+        "multi": true,
+        "name": "dataset",
+        "options": [],
+        "query": {
+          "query": "label_values({instance=~\"$instance\"},dataset)",
+          "refId": "PrometheusVariableQueryEditor-VariableQuery"
+        },
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "allValue": ".*",
+        "current": {
+          "selected": true,
+          "text": [
+            "All"
+          ],
+          "value": [
+            "$__all"
+          ]
+        },
+        "datasource": {
+          "type": "prometheus",
+          "uid": "prometheus_oss"
+        },
+        "definition": "label_values({instance=~\"$instance\"},target)",
+        "hide": 0,
+        "includeAll": true,
+        "label": "Target",
+        "multi": true,
+        "name": "target",
+        "options": [],
+        "query": {
+          "query": "label_values({instance=~\"$instance\"},target)",
+          "refId": "PrometheusVariableQueryEditor-VariableQuery"
+        },
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 1,
+        "type": "query"
+      }
+    ]
+  },
+  "time": {
+    "from": "now-15m",
+    "to": "now"
+  },
+  "timepicker": {},
+  "timezone": "",
+  "title": "MCPOC NB5 OSS",
+  "uid": "a78b996e-0d08-43e0-8d13-899cc7f88dd4",
+  "version": 19,
+  "weekStart": ""
+}
