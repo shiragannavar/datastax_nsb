@@ -51,6 +51,7 @@ fi
 # safety check
 if [ "$1" != "INSTALL" ]
 then
+    printf "\n"
 	printf "This is not safe unless you know what the script does. Read it first.\n\n"
 	printf "For example, the script assumes you are using an AWS i4 or similar instance that support.\n"
     printf "  NVMe (Non-Volatile Memory Express) protocol. Make sure the instance has 2 EBS volumes \n"
