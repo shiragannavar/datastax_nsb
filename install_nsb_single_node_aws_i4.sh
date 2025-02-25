@@ -48,7 +48,7 @@ then
     
 fi
 
-# safety
+# safety check
 if [ "$1" != "INSTALL" ]
 then
 	printf "This is not safe unless you know what the script does. Read it first.\n\n"
@@ -186,7 +186,3 @@ echo "   - create an service account and api token in the grafana UI - NOTE, mak
 echo "      this token is added to a ~/.nosqlbench/grafana file you create"
 echo "   -  create or import included dashboard"
 echo ""
-
-
---annotators [{'type':'log','level':'info'},{'type':'grafana','baseurl':'http://ec2-54-241-254-112.us-west-1.compute.amazonaws.com:3000'}]
---annotators [{'type':'log','level':'info'},{'type':'grafana','baseurl':'http://ec2-54-219-76-71.us-west-1.compute.amazonaws.com:3000'}]
