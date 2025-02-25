@@ -12,6 +12,11 @@ This script will install and configure a self contained single nod benchmarking 
   - Victoria Metrics docker container
   - Grafana container
 
+Node setup:
+
+   > chmod +x install_nsb_single_node_aws_i4.sh
+   > ./install_nsb_single_node_aws_i4.sh INSTALL
+   > ./install_nsb_single_node_aws_i4.sh VERIFY
 
 Next steps - aka things you can't do in the script:
 
