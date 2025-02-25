@@ -38,7 +38,7 @@ then
         printf "No-SQL-Bench is not installed or not running\n"
     fi
 
-    sudo ls -l /home/ubuntu/.nosqlbench/grafana &>> /dev/null
+    sudo ls -l .nosqlbench/grafana &>> /dev/null
     if [ $? -eq 0 ]
     then
         printf "Grafana key is installed\n\n"
@@ -46,6 +46,7 @@ then
         printf "Grafana key is not installed\n"
     fi
     
+    exit 0
 fi
 
 # safety check
