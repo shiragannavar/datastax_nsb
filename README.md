@@ -1,5 +1,5 @@
 # datastax_nsb
-Extensions for the no-sql-bench utility
+## Extensions for the no-sql-bench utility
 
 This package allows the user to create and deploy a single node implementation of NOSQLBench
 and it's associated apps for testing of DSE (or OSS) clusters.
@@ -12,13 +12,15 @@ This script will install and configure a self contained single nod benchmarking 
   - Victoria Metrics docker container
   - Grafana container
 
-Node setup:
+## Node setup:
 
-   > chmod +x install_nsb_single_node_aws_i4.sh
-   > ./install_nsb_single_node_aws_i4.sh INSTALL
-   > ./install_nsb_single_node_aws_i4.sh VERIFY
-
-Next steps - aka things you can't do in the script:
+<ol>
+  <li>chmod +x install_nsb_single_node_aws_i4.sh</li>
+  <li>./install_nsb_single_node_aws_i4.sh INSTALL</li>
+  <li>>./install_nsb_single_node_aws_i4.sh VERIFY</li>
+</ol?
+>
+## Next steps - aka things you can't do in the script:
 
  - Open ports 8428, 3000, 9042 on the AWS security group
  - Connect to Victoria Metric UI at http://<ip>:8428 
@@ -33,7 +35,7 @@ Next steps - aka things you can't do in the script:
        datasource name, which is the default in grafana. If you choose a different datasource name, you
        will need to replace the name 'prometheus' in the example dashboard json file.
 
-Nosqlbench examples:
+## Nosqlbench examples:
    - rpelace localIP with the local ip address of your vm
 
 > sudo ./nb5 cql_starter default.schema host=<localIP> localdc=dc1
