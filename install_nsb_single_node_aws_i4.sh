@@ -6,7 +6,7 @@ export NEEDRESTART_SUSPEND=1
 if [ "$1" == "VERIFY" ]
 then
     printf "Verifying the environment\n\n"
-    docker ps &>> /dev/null
+    sudo docker ps &>> /dev/null
     if [ $? -eq 0 ]
     then
         printf "Docker is installed and running\n\n"
@@ -14,7 +14,7 @@ then
         printf "Docker is not installed or not running\n"
     fi
 
-    docker exec -it  my-dse nodetool status &>> /dev/null
+    sudo docker exec -it  my-dse nodetool status &>> /dev/null
     if [ $? -eq 0 ]
     then
         printf "DSE is installed and running\n\n"
@@ -180,10 +180,10 @@ echo " - Open ports 8428, 3000, 9042 on the AWS security group"
 echo " - Connect to Victoria Metric UI at http://<ip>:8428 "
 echo " - Connect to Grafana at http://<ip>:3000 and: "
 echo "   - Create a prometheus datasource in Grafana - NOTE determine and use the private ip for the docker process:"
-echo "        - to determine that ip, use ifcinfig and look for the settings for the docker0 interface. will look something like"
+echo "        - to determine that ip, use ifconfig and look for the settings for the docker0 interface. will look something like"
 echo "           docker0: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500"
 echo "           inet 172.17.0.1  netmask 255.255.0.0  broadcast 172.17.255.255"
-echo "   - create an service account and api token in the grafana UI - NOTE, make sure to give the SA admin rights"
-echo "      this token is added to a ~/.nosqlbench/grafana file you create"
-echo "   -  create or import included dashboard"
+echo "   - Under Admin / Users and access, create an service account and api token in the grafana UI - NOTE, make sure to give "
+echo "      the SA admin rights. this token is added to a file named grafana_apikey in the ~/.nosqlbench/grafana folder"
+echo "   -  create or import included dashboard - NOTE: the example dashboard assumes the default datasource name: prometheus"
 echo ""
