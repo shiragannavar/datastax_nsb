@@ -158,9 +158,9 @@ chmod u+x nb5
 sudo DEBIAN_FRONTEND=noninteractive add-apt-repository -y universe
 sudo DEBIAN_FRONTEND=noninteractive apt install -y libfuse2
 
-sudo ./nb5 --list-scenarios
+## sudo ./nb5 --list-scenarios
 ## sudo ./nb5 cql_starter default.schema host=<localIP> localdc=dc1
-##sudo ./nb5 test.yaml default host=172.31.5.154 localdc=dc1 rampup-cycles=1000 main-cycles=400000
+## sudo ./nb5 test.yaml default host=172.31.5.154 localdc=dc1 rampup-cycles=1000 main-cycles=400000
 
 echo "Lastly lets create the argsfile for the DSE scenario"
 echo "Enter the public dns name of the EC2 instance - example ec2-54-153-54-249.us-west-1.compute.amazonaws.com: "
