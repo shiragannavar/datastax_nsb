@@ -62,10 +62,11 @@ then
 
     printf " Check this in the AWS console before returning...\n"
     printf " When you sure you want to continue, run the script with the argument 'INSTALL'\n\n"
+    printf "\n"
     exit 2
 fi
 
-echo ''
+echo ""
 echo "This script will install and configure a self contained single node benchmarking environment"
 echo " which contains: "
 echo "  - local no-sql-bench install"
@@ -79,7 +80,7 @@ echo " to any remote DSE cluster."
 echo ''
 echo "The process was built and tested using an Ubuntu 22.04 LTS instance type on AWS i4.xlarge instance type."
 echo "  It should work fine on other ubuntu versions, but mileage may vary"  
-echo ''
+echo ""
 
 echo "If you're ready for the adventure, hit any key to continue"
 read dummy
@@ -132,15 +133,6 @@ sudo docker run --rm hello-world
 # ubuntu user can manage docker
 sudo usermod -G docker ubuntu
 
-# tester user runs all our runner jobs
-sudo adduser --disabled-password --gecos "" tester
-sudo usermod -G docker,sudo tester
-printf "%%sudo\tALL=(ALL)\tNOPASSWD: ALL\n" | sudo tee -a /etc/sudoers
-sudo chmod ug+rw /var/run/docker.sock
-
-# verify tester can access docker
-sudo -u tester docker run --rm hello-world
-
 # make memory mapping work with large java heaps
 echo "vm.max_map_count = 256000" | sudo tee -a /etc/sysctl.conf && sudo sysctl -p /etc/sysctl.conf
 
@@ -151,8 +143,7 @@ sudo docker run -d -v /home/ubuntu/victoria-metrics-data:/victoria-metrics-data 
 
 sudo docker run -d --name=grafana -p 3000:3000 grafana/grafana
 
-echo ''
-echo ''
+echo ""
 echo "get nosqlbench"
 
 curl -L -O https://github.com/nosqlbench/nosqlbench/releases/latest/download/nb5
@@ -169,8 +160,8 @@ echo '--add-labels "instance:dsedocker"' > ./.nosqlbench/argsfile
 echo "--annotators [{'type':'log','level':'info'},{'type':'grafana','baseurl':'http://${pub_ip}:3000'}]" >> ./.nosqlbench/argsfile
 echo "--report-prompush-to http://${pub_ip}:8428/api/v1/import/prometheus/metrics/job/nosqlbench/instance/dsedocker" >> ./.nosqlbench/argsfile
 
-echo 'setup done!'
-echo ''
+echo "Setup complete!"
+echo ""
 
 echo "Next steps - aka things you can't do in the script:"
 echo " - Open ports 8428, 3000, 9042 on the AWS security group"
