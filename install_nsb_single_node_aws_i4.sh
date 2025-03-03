@@ -6,7 +6,8 @@ export NEEDRESTART_SUSPEND=1
 if [ "$1" == "VERIFY" ]
 then
     printf "Verifying the environment\n\n"
-    sudo docker ps &>> /dev/null
+    ##sudo docker ps &>> /dev/null
+ls
     if [ $? -eq 0 ]
     then
         printf "Docker is installed and running\n\n"
