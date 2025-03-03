@@ -1,5 +1,5 @@
 # - use the public url for the instance in this config: default grafana port=3000, vm=8428
 --add-labels "instance:dsedocker"
---annotators [{'type':'log','level':'info'},{'type':'grafana','baseurl':'http://ec2-54-153-54-249.us-west-1.compute.amazonaws.com/'}]
---report-prompush-to http://ec2-54-153-54-249.us-west-1.compute.amazonaws.com:8427/api/v1/import/prometheus/metrics/job/nosqlbench/instance/dsedocker
+--annotators [{'type':'log','level':'info'},{'type':'grafana','baseurl':'http://<aws_public_dns_name>:3000/'}]
+--report-prompush-to http://<aws_public_dns_name>:8428/api/v1/import/prometheus/metrics/job/nosqlbench/instance/dsedocker
 
