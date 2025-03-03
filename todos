@@ -1,0 +1,6 @@
+## fixes and bugs to be addressed
+
+1. Grafana UI issue on chrome/datastax profile
+  - of snap, when importing dashboard
+2. sudo when creating folders - messy
+

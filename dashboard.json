@@ -90,7 +90,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "prometheus_oss"
+        "uid": "prometheus"
       },
       "fieldConfig": {
         "defaults": {
@@ -169,7 +169,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "prometheus_oss"
+            "uid": "prometheus"
           },
           "editorMode": "code",
           "expr": "{__name__=~\"recall.*\",instance=~\"$instance\",job=\"nosqlbench\",scenario=~\"$scenario\",activity=~\"$activity\",k=~\"$k\",target=~\"$target\"}",
@@ -180,7 +180,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "prometheus_oss"
+            "uid": "prometheus"
           },
           "editorMode": "code",
           "expr": "{__name__=~\"recall_100_w.*\",instance=~\"$instance\",job=\"nosqlbench\",scenario=~\"$scenario\",activity=~\"$activity\",k=~\"$k\",target=~\"$target\"}",
@@ -196,7 +196,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "prometheus_oss"
+        "uid": "prometheus"
       },
       "fieldConfig": {
         "defaults": {
@@ -275,7 +275,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "prometheus_oss"
+            "uid": "prometheus"
           },
           "editorMode": "code",
           "expr": "{__name__=~\"precision.*\",instance=~\"$instance\",job=\"nosqlbench\",scenario=~\"$scenario\",activity=~\"$activity\",k=~\"$k\",target=~\"$target\"}",
@@ -303,7 +303,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "prometheus_oss"
+        "uid": "prometheus"
       },
       "description": "This view shows the current cycle progress in terms of cycles values dispensed to threads and a count of those which have been fully processed.\n\n__Dispatched cycles__ are those which have been allocated to activity threads to process. __Retired cycles__ are those which have not been retired or completed. \n\nThe difference between the two represents work which is subscribed by activity threads but not yet complete.",
       "fieldConfig": {
@@ -397,7 +397,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "prometheus_oss"
+            "uid": "prometheus"
           },
           "editorMode": "code",
           "exemplar": false,
@@ -412,7 +412,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "prometheus_oss"
+            "uid": "prometheus"
           },
           "editorMode": "code",
           "exemplar": false,
@@ -432,7 +432,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "prometheus_oss"
+        "uid": "prometheus"
       },
       "description": "These two metrics show the 1-minute averaged ops per second for all ops (successes and errors) and succesful ops (no errors during execution) separately.\\n\\nWhen there are no errors, these metrics should be the same. When there are errors, there will be a difference. In that case, you can look at the error metrics to learn more about what is happening.\n\nBy comparing these two metrics for any activity, you have a quick first-glance sanity check that your tests are configured properly and\\nthat there are no serious configuration or resource issues. In addition, this is the primary throughput metric.",
       "fieldConfig": {
@@ -508,7 +508,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "prometheus_oss"
+            "uid": "prometheus"
           },
           "editorMode": "code",
           "expr": "avg_over_time(result_1mRate{job=\"nosqlbench\", instance=~\"$instance\", scenario=~\"$scenario\", activity=~\"$activity\",target=~\"$target\"}[1m])",
@@ -523,7 +523,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "prometheus_oss"
+            "uid": "prometheus"
           },
           "editorMode": "code",
           "expr": "avg_over_time(result_success_1mRate{job=\"nosqlbench\", instance=~\"$instance\", scenario=~\"$scenario\", activity=~\"$activity\",target=~\"$target\"}[1m])",
@@ -542,7 +542,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "prometheus_oss"
+        "uid": "prometheus"
       },
       "description": "The tries distribution is an HDR histogram which represents how many times an operation was submitted. In a well balanced system, tries should be 1 across the board.\n\nEvery operation which is executed within NoSQLBench should have a `tries` metric. For example, with CQL, the number of times an operation is submitted before it is succesful is ideally 1. If you are overloading your target system, thus forcing resource contention, you may see operations timeout.\n\n\nBy default, NoSQLBench will try up to 10 times to submit operations before giving up and throwing an error for an operation.\n\nThe tries metric can be used as a low-noise indicator of system saturation. For example, if you are running a system marginally beyond its capacity, the tries for operations will go above 1 at the higher percentiles such as P99. If you increase the load even further, more retries will be needed and less work will be completed, thus showing higher retries at even lower percentiles, like P95, for example.\n\nAs such, you can use the tries metric as an indicator of relative saturation.",
       "fieldConfig": {
@@ -619,7 +619,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "prometheus_oss"
+            "uid": "prometheus"
           },
           "editorMode": "code",
           "expr": "tries_bucket{job=\"nosqlbench\",instance=~\"$instance\",scenario=~\"$scenario\",activity=~\"$activity\",node=~\"$node\",target=~\"$target\"}",
@@ -636,7 +636,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "prometheus_oss"
+        "uid": "prometheus"
       },
       "description": "When an exception is caught and counted in a scenario, a specially named metric is emited which includes a simplified name of the error type.\n\nEach of these metrics is created as needed in the NoSQLBench runtime.\n\nThese metrics are formated with a name pattern of `errorcounts.NAME` where NAME is the simple name of the exception class which was caught during the operation. For example, For an activity named `foo``, you would expect an exception named `FooTimeoutException` to be shown with a metric name of ... `foo.errorcounts.FooTimeoutException`",
       "fieldConfig": {
@@ -716,7 +716,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "prometheus_oss"
+            "uid": "prometheus"
           },
           "editorMode": "code",
           "expr": "{__name__=~\"errors_.*_total\",job=\"nosqlbench\",activity=~\"$activity\",instance=~\"$instance\",scenario=~\"$scenario\",target=~\"$target\"}",
@@ -728,7 +728,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "prometheus_oss"
+            "uid": "prometheus"
           },
           "editorMode": "code",
           "expr": "{__name__=~\"errors_ALL_total\", job=\"nosqlbench\", activity=~\"$activity\", instance=~\"$instance\", scenario=~\"$scenario\",target=~\"$target\"}",
@@ -745,7 +745,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "prometheus_oss"
+        "uid": "prometheus"
       },
       "description": "",
       "fieldConfig": {
@@ -846,7 +846,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "prometheus_oss"
+            "uid": "prometheus"
           },
           "editorMode": "code",
           "expr": "ops_pending{instance=~\"$instance\",scenario=~\"$scenario\",activity=~\"$activity\"}",
@@ -861,7 +861,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "prometheus_oss"
+            "uid": "prometheus"
           },
           "editorMode": "code",
           "expr": "ops_complete{instance=~\"$instance\",scenario=~\"$scenario\",activity=~\"$activity\"}",
@@ -874,7 +874,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "prometheus_oss"
+            "uid": "prometheus"
           },
           "editorMode": "code",
           "expr": "ops_active{instance=~\"$instance\",scenario=~\"$scenario\",activity=~\"$activity\"}",
@@ -887,7 +887,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "prometheus_oss"
+            "uid": "prometheus"
           },
           "editorMode": "code",
           "expr": "threads{workload=~\"$workload\", activity=~\"$activity\", instance=~\"$instance\", session=~\"$session\", scenario=~\"$scenario\", target=~\"$target\", container=~\"$container\"}",
@@ -904,7 +904,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "prometheus_oss"
+        "uid": "prometheus"
       },
       "description": "The service time distribution is an HDR histogram that represents the time elapsed from when an operation is submitted for execution to when its result has been received.\n\nFrom the vantage point of the NoSQLBench runtime, this is a client-side metric. Thus, the service time captures the processing time that an application would see, including driver logic, wire time (transport), and server-side processing.\n\nThis metric does not include the waittime or the responsetime metrics. These metrics are only meaningful (and provided) when a `cyclerate=` is provided to an activity. When computing the responsetime metric, the servicetime is added to the waittime for a given operation.",
       "fieldConfig": {
@@ -1004,7 +1004,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "prometheus_oss"
+            "uid": "prometheus"
           },
           "editorMode": "code",
           "expr": "result_success_bucket{job=\"nosqlbench\",instance=~\"$instance\",scenario=~\"$scenario\",activity=~\"$activity\",node=~\"$node\",target=~\"$target\"}",
@@ -1018,7 +1018,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "prometheus_oss"
+            "uid": "prometheus"
           },
           "editorMode": "code",
           "expr": "result_success_bucket{job=\"nosqlbench\",instance=~\"$instance\",scenario=~\"$scenario\",activity=~\"$activity\",node=~\"$node\",target=~\"$target\",le=\"0.95\"}",
@@ -1032,7 +1032,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "prometheus_oss"
+            "uid": "prometheus"
           },
           "editorMode": "code",
           "expr": "result_success_bucket{job=\"nosqlbench\",instance=~\"$instance\",scenario=~\"$scenario\",activity=~\"$activity\",node=~\"$node\",target=~\"$target\",le=\"0.99\"}",
@@ -1050,7 +1050,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "prometheus_oss"
+        "uid": "prometheus"
       },
       "description": "The service time distribution is an HDR histogram that represents the time elapsed from when an operation is submitted for execution to when its result has been received.\n\nFrom the vantage point of the NoSQLBench runtime, this is a client-side metric. Thus, the service time captures the processing time that an application would see, including driver logic, wire time (transport), and server-side processing.\n\nThis metric does not include the waittime or the responsetime metrics. These metrics are only meaningful (and provided) when a `cyclerate=` is provided to an activity. When computing the responsetime metric, the servicetime is added to the waittime for a given operation.",
       "fieldConfig": {
@@ -1126,7 +1126,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "prometheus_oss"
+            "uid": "prometheus"
           },
           "editorMode": "code",
           "expr": "result_success_bucket{job=\"nosqlbench\",instance=~\"$instance\",scenario=~\"$scenario\",activity=~\"$activity\",node=~\"$node\",target=~\"$target\"}",
@@ -1144,7 +1144,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "prometheus_oss"
+        "uid": "prometheus"
       },
       "description": "This panel shows the number of cycles remaining, pending, and complete for a given activity",
       "fieldConfig": {
@@ -1250,7 +1250,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "prometheus_oss"
+            "uid": "prometheus"
           },
           "editorMode": "code",
           "exemplar": false,
@@ -1263,7 +1263,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "prometheus_oss"
+            "uid": "prometheus"
           },
           "editorMode": "code",
           "expr": "ops_active{job=\"nosqlbench\",instance=~\"$instance\",scenario=~\"$scenario\",activity=~\"$activity\",node=~\"$node\",target=~\"$target\"}",
@@ -1276,7 +1276,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "prometheus_oss"
+            "uid": "prometheus"
           },
           "editorMode": "code",
           "expr": "ops_complete{job=\"nosqlbench\",instance=~\"$instance\",scenario=~\"$scenario\",activity=~\"$activity\",node=~\"$node\",target=~\"$target\"}",
@@ -1303,7 +1303,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "prometheus_oss"
+            "uid": "prometheus"
           },
           "description": "This is a view of successful operations for a specific op:\n- op: $op\n- scenario: $scenario\n- activity: $activity",
           "fieldConfig": {
@@ -1399,7 +1399,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "prometheus_oss"
+                "uid": "prometheus"
               },
               "editorMode": "code",
               "expr": "{__name__=~\"successfor_.*_bucket\",job=\"nosqlbench\", instance=~\"$instance\", scenario=~\"$scenario\", activity=~\"$activity\", op=~\"$op\"}",
@@ -1414,7 +1414,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "prometheus_oss"
+                "uid": "prometheus"
               },
               "editorMode": "code",
               "expr": "{__name__=~\"successfor_.*1mRate\",job=\"nosqlbench\", instance=~\"$instance\", scenario=~\"$scenario\", activity=~\"$activity\", op=~\"$op\"}",
@@ -1433,7 +1433,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "prometheus_oss"
+            "uid": "prometheus"
           },
           "description": "These two metrics show the 1-minute averaged ops per second for all ops (successes and errors) and succesful ops (no errors during execution) separately.\\n\\nWhen there are no errors, these metrics should be the same. When there are errors, there will be a difference. In that case, you can look at the error metrics to learn more about what is happening.\n\nBy comparing these two metrics for any activity, you have a quick first-glance sanity check that your tests are configured properly and\\nthat there are no serious configuration or resource issues. In addition, this is the primary throughput metric.",
           "fieldConfig": {
@@ -1529,7 +1529,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "prometheus_oss"
+                "uid": "prometheus"
               },
               "editorMode": "code",
               "expr": "{__name__=~\"errorsfor_.*_bucket\",job=\"nosqlbench\", instance=~\"$instance\", scenario=~\"$scenario\", activity=~\"$activity\",op=~\"$op\"}",
@@ -1544,7 +1544,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "prometheus_oss"
+                "uid": "prometheus"
               },
               "editorMode": "code",
               "expr": "{__name__=~\"errorsfor_.*1mRate\",job=\"nosqlbench\", instance=~\"$instance\", scenario=~\"$scenario\", activity=~\"$activity\", op=~\"$op\"}",
@@ -1580,7 +1580,7 @@
         },
         "datasource": {
           "type": "prometheus",
-          "uid": "prometheus_oss"
+          "uid": "prometheus"
         },
         "definition": "label_values(instance)",
         "hide": 0,
@@ -1612,7 +1612,7 @@
         },
         "datasource": {
           "type": "prometheus",
-          "uid": "prometheus_oss"
+          "uid": "prometheus"
         },
         "definition": "label_values({instance=~\"$instance\"},scenario)",
         "hide": 0,
@@ -1644,7 +1644,7 @@
         },
         "datasource": {
           "type": "prometheus",
-          "uid": "prometheus_oss"
+          "uid": "prometheus"
         },
         "definition": "label_values({instance=~\"$instance\"},vendor)",
         "hide": 0,
@@ -1675,7 +1675,7 @@
         },
         "datasource": {
           "type": "prometheus",
-          "uid": "prometheus_oss"
+          "uid": "prometheus"
         },
         "definition": "label_values({instance=~\"$instance\"},node)",
         "hide": 0,
@@ -1707,7 +1707,7 @@
         },
         "datasource": {
           "type": "prometheus",
-          "uid": "prometheus_oss"
+          "uid": "prometheus"
         },
         "definition": "label_values({instance=~\"$instance\",scenario=~\"$scenario\"},activity)",
         "hide": 0,
@@ -1735,7 +1735,7 @@
         },
         "datasource": {
           "type": "prometheus",
-          "uid": "prometheus_oss"
+          "uid": "prometheus"
         },
         "definition": "label_values({instance=~\"$instance\"},k)",
         "hide": 0,
@@ -1767,7 +1767,7 @@
         },
         "datasource": {
           "type": "prometheus",
-          "uid": "prometheus_oss"
+          "uid": "prometheus"
         },
         "definition": "label_values({instance=~\"$instance\",scenario=~\"$scenario\"},op)",
         "hide": 0,
@@ -1799,7 +1799,7 @@
         },
         "datasource": {
           "type": "prometheus",
-          "uid": "prometheus_oss"
+          "uid": "prometheus"
         },
         "definition": "label_values({instance=~\"$instance\"},dataset)",
         "hide": 0,
@@ -1831,7 +1831,7 @@
         },
         "datasource": {
           "type": "prometheus",
-          "uid": "prometheus_oss"
+          "uid": "prometheus"
         },
         "definition": "label_values({instance=~\"$instance\"},target)",
         "hide": 0,
@@ -1858,7 +1858,7 @@
   },
   "timepicker": {},
   "timezone": "",
-  "title": "MCPOC NB5 OSS",
+  "title": "NSB Single Node",
   "uid": "a78b996e-0d08-43e0-8d13-899cc7f88dd4",
   "version": 19,
   "weekStart": ""
