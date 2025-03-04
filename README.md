@@ -49,8 +49,49 @@ This script will install and configure a self contained single nod benchmarking 
 
 ![io1 Volumes](./img/nvme_volumes.png)
 
+## Steps required once script completes
+
+### Create a new Prometheus Connection
+#### NOTE: Leave the default name 'prometheus' if you change this the nsb config must be changed
+####  The IP here must be the local IP the Docker container is running on, you can check this by
+####   typing this command in the vm: 
+####            ifconfig
+####   and look for the IP under the section docker
+
+![Connection URL](./img/ConnectionIP.png)
+
+### Test and Save the string
+
+![Save and Test](./img/ProSaveandTest.png)
+
+### Create a Service Account.
+
+![Save and Test](./img/SAAdd.png)
+![Save and Test](./img/ServiceAccountADMIN.png)
+
+### Create a Token for the account. Copy n Paste the token
+###  you can run the set_grafana_apikey.sh script to set this value in the VM
+
+![Save and Test](./img/TokenCopy.png)
+
+
+### Import the sample Dashboard. Import button is at the top-right in Grafana UI.
+### You may encounter a bug with import, if you do just copy/paste the json
+
+![Save and Test](./img/DashUpload.png)
+![Save and Test](./img/DashImportRight.png)
+![Save and Test](./img/AwSnap.png)
+![Save and Test](./img/DashImport.png)
+
+### Use the api key generated here and run the helper script to set in the vm
+
+```
+> ./set_grafana_apikey.sh
+Enter token value:
+```
+
 ## Nosqlbench examples:
-   - rpelace localIP with the local ip address of your vm
+   - Replace localIP with the local ip address of your vm
 
 > sudo ./nb5 cql_starter default.schema host=<localIP> localdc=dc1
 > sudo ./nb5 test.yaml default host=<localIP> localdc=dc1 rampup-cycles=1000 main-cycles=400000
