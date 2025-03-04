@@ -82,9 +82,6 @@ sudo mkdir -p /var/lib/docker
 printf "LABEL=docker\t/var/lib/docker\text4\tdefaults\t0 2\n" | sudo tee -a /etc/fstab
 sudo mount /var/lib/docker
 
-# remount /home on nvme1n
-sh ./move_home.sh
-
 # maybe missing packages
 sudo DEBIAN_FRONTEND=noninteractive apt install -y jq net-tools sysstat htop curl
 
@@ -137,6 +134,9 @@ read pub_ip
 echo '--add-labels "instance:dsedocker"' > ./.nosqlbench/argsfile
 echo "--annotators [{'type':'log','level':'info'},{'type':'grafana','baseurl':'http://${pub_ip}:3000'}]" >> ./.nosqlbench/argsfile
 echo "--report-prompush-to http://${pub_ip}:8428/api/v1/import/prometheus/metrics/job/nosqlbench/instance/dsedocker" >> ./.nosqlbench/argsfile
+
+# remount /home on nvme1n
+sh ./move_home.sh
 
 echo "Setup complete!"
 echo ""
