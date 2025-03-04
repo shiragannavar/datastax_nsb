@@ -6,9 +6,7 @@ export NEEDRESTART_SUSPEND=1
 if [ "$1" == "VERIFY" ]
 then
     printf "Verifying the environment\n\n"
-    sudo docker ps &>> /dev/null
-    if [ $? -eq 0 ]
-    then
+    if sudo docker ps &> /dev/null; then
         printf "Docker is installed and running\n\n"
     else
         printf "Docker is not installed or not running\n"
@@ -26,20 +24,10 @@ then
         printf "nvme volumes are not mounted\n"
     fi
 
-    sudo ./nb5 --list-scenarios &>> /dev/null
-    if [ $? -eq 0 ]
-    then
+    if sudo ./nb5 --list-scenarios &> /dev/null; then
         printf "No-SQL-Bench is installed and running\n\n"
     else
         printf "No-SQL-Bench is not installed or not running\n"
-    fi
-
-    sudo ls -l .nosqlbench/grafana &>> /dev/null
-    if [ $? -eq 0 ]
-    then
-        printf "Grafana key is installed\n\n"
-    else
-        printf "Grafana key is not installed\n"
     fi
     
     exit 0
