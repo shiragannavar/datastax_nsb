@@ -6,25 +6,19 @@ export NEEDRESTART_SUSPEND=1
 if [ "$1" == "VERIFY" ]
 then
     printf "Verifying the environment\n\n"
-    sudo docker ps &>> /dev/null
-    if [ $? -eq 0 ]
-    then
+    if sudo docker ps &> /dev/null; then
         printf "Docker is installed and running\n\n"
     else
         printf "Docker is not installed or not running\n"
     fi
 
-    sudo docker exec -it  my-dse nodetool status &>> /dev/null
-    if [ $? -eq 0 ]
-    then
+    if sudo docker exec -it my-dse nodetool status &> /dev/null; then
         printf "DSE is installed and running\n\n"
     else
         printf "DSE is not installed or not running\n"
     fi
 
-    df -h |grep nvme &>> /dev/null
-    if [ $? -eq 0 ]
-    then
+    if df -h | grep nvme &> /dev/null; then
         printf "nvme volumes are mounted\n\n"
     else
         printf "nvme volumes are not mounted\n"
@@ -62,8 +56,7 @@ then
 
     printf " Check this in the AWS console before returning...\n"
     printf " When you sure you want to continue, run the script with the argument 'INSTALL'\n\n"
-    printf "\n"
-    exit 2
+    exit 0
 fi
 
 echo ""
@@ -100,12 +93,7 @@ printf "LABEL=docker\t/var/lib/docker\text4\tdefaults\t0 2\n" | sudo tee -a /etc
 sudo mount /var/lib/docker
 
 # remount /home on nvme1n
-sudo mke2fs /dev/nvme1n1
-sudo e2label /dev/nvme1n1 home
-printf "LABEL=home\t/home\text4\tdefaults\t0 2\n" | sudo tee -a /etc/fstab
-sudo rsync -av /home/ /_home/
-sudo mount /home
-sudo rsync -av /_home/ /home/
+sh ./move_home.sh
 
 # maybe missing packages
 sudo DEBIAN_FRONTEND=noninteractive apt install -y jq net-tools sysstat htop curl
