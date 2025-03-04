@@ -138,8 +138,8 @@ echo "--report-prompush-to http://${pub_ip}:8428/api/v1/import/prometheus/metric
 # remount /home on nvme1n
 sh ./move_home.sh
 
-echo "Setup complete!"
 echo ""
+echo "Setup complete!"
 
 echo "Next steps - aka things you can't do in the script:"
 echo " - Open ports 8428, 3000, 9042 on the AWS security group"

@@ -19,21 +19,6 @@ This script will install and configure a self contained single nod benchmarking 
   <li>./install_nsb_single_node_aws_i4.sh INSTALL</li>
   <li>./install_nsb_single_node_aws_i4.sh VERIFY</li>
 </ol>
->
-## Next steps - aka things you can't do in the script:
-
- - Open ports 8428, 3000, 9042 on the AWS security group
- - Connect to Victoria Metric UI at http://<ip>:8428 
- - Connect to Grafana at http://<ip>:3000 and: 
-   - Create a prometheus datasource in Grafana - NOTE determine and use the private ip for the docker process:
-        - to determine that ip, use ifcinfig and look for the settings for the docker0 interface. will look something like
-           docker0: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
-           inet 172.17.0.1  netmask 255.255.0.0  broadcast 172.17.255.255
-   - create an service account and api token in the grafana UI - NOTE, make sure to give the SA admin rights
-      this token is added to a ~/.nosqlbench/grafana file you create
-   -  create or import included dashboard - the example dashboard is setup using 'prometheus' as the 
-       datasource name, which is the default in grafana. If you choose a different datasource name, you
-       will need to replace the name 'prometheus' in the example dashboard json file.
 
 ## EC2 Provision
 
@@ -50,6 +35,25 @@ This script will install and configure a self contained single nod benchmarking 
 ![io1 Volumes](./img/nvme_volumes.png)
 
 ## Steps required once script completes
+## Next steps - aka things you can't do in the script:
+
+ - Open ports 8428, 3000, 9042 on the AWS security group
+ - Connect to Victoria Metric UI at http://<ip>:8428 
+ - Connect to Grafana at http://<ip>:3000 and: 
+   - Create a prometheus datasource in Grafana - NOTE determine and use the private ip for the docker process:
+        - to determine that ip, use ifcinfig and look for the settings for the docker0 interface. will look something like
+           docker0: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
+           inet 172.17.0.1  netmask 255.255.0.0  broadcast 172.17.255.255
+   - create an service account and api token in the grafana UI - NOTE, make sure to give the SA admin rights
+      this token is added to a ~/.nosqlbench/grafana file you create
+   -  create or import included dashboard - the example dashboard is setup using 'prometheus' as the 
+       datasource name, which is the default in grafana. If you choose a different datasource name, you
+       will need to replace the name 'prometheus' in the example dashboard json file.
+
+### Access AWS Console, navigate to your vm, click the security tab and add 3 new rules
+
+![Instance Type](./img/AWSSecurityGroup.png)
+![Instance Type](./img/Add3Rules.png)
 
 ### Create a new Prometheus Connection
 #### NOTE: Leave the default name 'prometheus' if you change this the nsb config must be changed
@@ -73,7 +77,6 @@ This script will install and configure a self contained single nod benchmarking 
 ###  you can run the set_grafana_apikey.sh script to set this value in the VM
 
 ![Save and Test](./img/TokenCopy.png)
-
 
 ### Import the sample Dashboard. Import button is at the top-right in Grafana UI.
 ### You may encounter a bug with import, if you do just copy/paste the json
