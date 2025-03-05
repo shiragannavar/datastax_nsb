@@ -49,8 +49,8 @@ chmod +x install_nsb_single_node_aws_i4.sh
  - Connect to Grafana at http://<ip>:3000 and: 
    - Create a prometheus datasource in Grafana - NOTE determine and use the private ip for the docker process:
         - to determine that ip, use ifconfig and look for the settings for the docker0 interface. will look something like
-           docker0: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
-           inet <span style="color:blue">172.17.0.1</span>  netmask 255.255.0.0  broadcast 172.17.255.255
+           - docker0: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
+           - inet 172.17.0.1  netmask 255.255.0.0  broadcast 172.17.255.255
    - create an service account and api token in the grafana UI - NOTE, make sure to give the SA admin rights
       this token is added to a ~/.nosqlbench/grafana file you create
    -  create or import included dashboard - the example dashboard is setup using 'prometheus' as the 
