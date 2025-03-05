@@ -16,6 +16,8 @@ This script will install and configure a self contained single nod benchmarking 
 
 ### Set permissions and execute the setup script
 ```
+
+cd datastax_nsb
 chmod +x install_nsb_single_node_aws_i4.sh
 ./install_nsb_single_node_aws_i4.sh INSTALL
 ```
@@ -25,9 +27,9 @@ chmod +x install_nsb_single_node_aws_i4.sh
 ./install_nsb_single_node_aws_i4.sh VERIFY
 ```
 
-## EC2 Provision
+## EC2 Provisioning
 
-### Choose an unbuntu flavor - tested with 22.04
+### Choose an ubuntu flavor - tested with version 22.04
 
 ![Ubuntu version](./img/Ubuntu2204.png)
 
@@ -35,7 +37,7 @@ chmod +x install_nsb_single_node_aws_i4.sh
 
 ![Instance Type](./img/EC2_i4.png)
 
-### Create 2 addtional volumes
+### Create 2 addtional volumes - use io1 for optimal iops performance
 
 ![io1 Volumes](./img/nvme_volumes.png)
 
@@ -46,9 +48,9 @@ chmod +x install_nsb_single_node_aws_i4.sh
  - Connect to Victoria Metric UI at http://<ip>:8428 
  - Connect to Grafana at http://<ip>:3000 and: 
    - Create a prometheus datasource in Grafana - NOTE determine and use the private ip for the docker process:
-        - to determine that ip, use ifcinfig and look for the settings for the docker0 interface. will look something like
+        - to determine that ip, use ifconfig and look for the settings for the docker0 interface. will look something like
            docker0: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
-           inet 172.17.0.1  netmask 255.255.0.0  broadcast 172.17.255.255
+           inet <span style="color:blue">172.17.0.1</span>  netmask 255.255.0.0  broadcast 172.17.255.255
    - create an service account and api token in the grafana UI - NOTE, make sure to give the SA admin rights
       this token is added to a ~/.nosqlbench/grafana file you create
    -  create or import included dashboard - the example dashboard is setup using 'prometheus' as the 
