@@ -2,5 +2,5 @@
 
 1. Grafana UI issue on chrome/datastax profile
   - of snap, when importing dashboard
-2. sudo when creating folders - messy
+2. remounting home, causes problems with files created in parent shell
 
