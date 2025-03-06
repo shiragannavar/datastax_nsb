@@ -6,5 +6,5 @@ echo "Running a couple no sql bench smoke tests"
 echo "Local IP Address: $local_ip"
 
 sudo ./nb5 cql_starter default.schema host=${local_ip} localdc=dc1
-sudo ./nb5 test.yaml default host=${local_ip} localdc=dc1 rampup-cycles=1000 main-cycles=400000
+sudo ./nb5 test.yaml default host=${local_ip} localdc=dc1 rampup-cycles=1000 main-cycles=400000 rate=1000
 
