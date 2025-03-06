@@ -4,6 +4,21 @@
 This package allows the user to create and deploy a single node implementation of NOSQLBench
 and it's associated apps for testing of DSE (or OSS) clusters.
 
+It is designed to be run directly on an Ubuntu instance.
+
+## WARNING: 
+Before executing each script, you need to provision an EC2 (or other vm) instance and
+clone this repo onto the machine. The script assumes you also add 2 nvme (Non-Volatile Memory Express) 
+volumes. From the vm, type this command to determine what volumes are available
+
+```
+lsblk
+```
+
+Look for something that looks like
+
+    nvme1n1      259:3    0    200G  0 disk
+    nvme2n1      259:4    0    100G  0 disk
 
 This script will install and configure a self contained single nod benchmarking environment
  the deployment contains: 
@@ -12,22 +27,7 @@ This script will install and configure a self contained single nod benchmarking 
   - Victoria Metrics docker container
   - Grafana container
 
-## Usage:
-
-### Set permissions and execute the setup script
-```
-
-cd datastax_nsb
-chmod +x install_nsb_single_node_aws_i4.sh
-./install_nsb_single_node_aws_i4.sh INSTALL
-```
-
-### verify things went well
-```
-./install_nsb_single_node_aws_i4.sh VERIFY
-```
-
-## EC2 Provisioning
+## 1. EC2 Provisioning
 
 ### Choose an ubuntu flavor - tested with version 22.04
 
@@ -41,8 +41,20 @@ chmod +x install_nsb_single_node_aws_i4.sh
 
 ![io1 Volumes](./img/nvme_volumes.png)
 
-## Steps required once script completes
-## Next steps - aka things you can't do in the script:
+## 2. Setup:
+
+```
+cd datastax_nsb
+chmod +x install_nsb_single_node_aws_i4.sh
+./install_nsb_single_node_aws_i4.sh INSTALL
+```
+
+### verify things went well
+```
+./install_nsb_single_node_aws_i4.sh VERIFY
+```
+
+## 3. Steps required once script completes
 
  - Open ports 8428, 3000, 9042 on the AWS security group
  - Connect to Victoria Metric UI at http://<ip>:8428 
@@ -93,15 +105,21 @@ chmod +x install_nsb_single_node_aws_i4.sh
 ![Save and Test](./img/AwSnap.png)
 ![Save and Test](./img/DashImport.png)
 
-### Use the api key generated here and run the helper script to set in the vm
+### Run the helper script and enter the api key generated in grafana 
 
 ```
 > ./set_grafana_apikey.sh
 Enter token value:
 ```
 
-## Nosqlbench examples:
-   - Replace localIP with the local ip address of your vm
+## 4. Nosqlbench smoke tests:
 
-> sudo ./nb5 cql_starter default.schema host=<localIP> localdc=dc1
-> sudo ./nb5 test.yaml default host=<localIP> localdc=dc1 rampup-cycles=1000 main-cycles=400000
+```
+> ./run_nsb_tests.sh
+```
+
+#### This will execute the builtin cql_starter test as well as the test included in the test.yaml file
+#### Check the nosqlbench doc for more on test execution
+
+### Visit the grafana UI Dashboard to see stats. NOTE: It takes 30sec or more for the dashboard to 
+### update once a test is run.
