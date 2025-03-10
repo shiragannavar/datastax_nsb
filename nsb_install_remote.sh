@@ -18,9 +18,6 @@ PEM_FILE='/Users/bob.hardaway/work/poc/mc/bobh_mc_poc_key.pem'
 EC2_Host='ec2-3-101-21-135.us-west-1.compute.amazonaws.com'
 USER=ubuntu
 
-#!/bin/bash
-
-
 
 echo 'push the install package to target hist'
 scp -i $PEM_FILE nsb_installer.tar.gz $USER@$EC2_Host:~/
@@ -42,7 +39,8 @@ echo ' 1. Check prerequisites'
 echo ' 2. Install NoSQLBench and Grafana/Victoria containers'
 echo ' 3. Remount Docker home on nvme partition'
 echo ' 4. Verify Installation'
-echo ' 5. Run NoSQLBench smoke tests'
+echo ' 5. Set grafana key value''
+echo ' 6. Run NoSQLBench smoke tests'
 echo ''
 read -p 'Enter the number of the step you want to execute: ' step
 
@@ -53,19 +51,23 @@ case $step in
     ;;
   2)
     echo 'Installing NoSQLBench and Grafana/Victoria containers'
-    COMMAND='sudo docker run -d --name grafana -p 3000:3000 grafana/grafana'
+    COMMAND='echo "Installing"'
     ;;
   3)
     echo 'Remounting Docker home on nvme partition'
-    COMMAND='sudo service docker stop && sudo mv /var/lib/docker /nvme/docker && sudo ln -s /nvme/docker /var/lib/docker && sudo service docker start'
+    COMMAND='echo "remounting"'
     ;;
   4)
     echo 'Verifying Installation'
-    COMMAND='sudo docker ps'
+    COMMAND='./verify_install.sh'
     ;;
   5)
+    echo 'Set the grafana api key value'
+    COMMAND='echo "Running nsb tests"'
+    ;;
+  6)
     echo 'Running NoSQLBench smoke tests'
-    COMMAND='sudo ./nb5 --list-scenarios'
+    COMMAND='echo "Running nsb tests"'
     ;;
   *)
     echo 'Invalid step'
