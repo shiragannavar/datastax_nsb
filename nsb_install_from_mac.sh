@@ -16,12 +16,12 @@ read -p 'Enter the EC2 Host (ec2-13-52-180-80.us-west-1.compute.amazonaws.com): 
 read -p 'Enter the user (ubuntu): ' USER
 
 PEM_FILE='/Users/bob.hardaway/work/install/bobhdsedemokey.pem'
-EC2_Host='ec2-13-52-180-80.us-west-1.compute.amazonaws.com'
+EC2_Host='ec2-52-53-171-73.us-west-1.compute.amazonaws.com'
 USER=ubuntu
 
 echo 'push the install package to target host'
-scp -i "$PEM_FILE" nsb_installer.tar.gz "$USER@$EC2_Host:~/"
-ssh -i "$PEM_FILE" "$USER@$EC2_Host" 'tar -xvf nsb_installer.tar.gz'
+scp -i "$PEM_FILE" datastax_nsb.tar.gz "$USER@$EC2_Host:~/"
+ssh -i "$PEM_FILE" "$USER@$EC2_Host" 'tar -xvf datastax_nsb.tar.gz'
 ssh -i "$PEM_FILE" "$USER@$EC2_Host" 'cd datastax_nsb ; ls -l'
 
 while true; do
@@ -74,22 +74,14 @@ while true; do
         exit 0
         ;;
     ALL)
-        COMMAND='./datastax_nsb/scripts/check_prereqs.sh'
-        ssh -i "$PEM_FILE" "$USER@$EC2_Host" "$COMMAND"
         COMMAND='./datastax_nsb/scripts/docker_install.sh'
         ssh -i "$PEM_FILE" "$USER@$EC2_Host" "$COMMAND"
         COMMAND='./datastax_nsb/scripts/move_home.sh'
-        ssh -i "$PEM_FILE" "$USER@$EC2_Host" "$COMMAND"
-        COMMAND='./datastax_nsb/scripts/verify_install.sh'
-        ssh -i "$PEM_FILE" "$USER@$EC2_Host" "$COMMAND"
-        COMMAND='./datastax_nsb/scripts/set_grafana_apikey.sh'
-        ssh -i "$PEM_FILE" "$USER@$EC2_Host" "$COMMAND"
+        ssh -i "$PEM_FILE" "$USER@$EC2_Host" "$COMMAND"ls -l
         COMMAND='./datastax_nsb/scripts/install_nsb.sh'
         ssh -i "$PEM_FILE" "$USER@$EC2_Host" "$COMMAND"
-        COMMAND='./datastax_nsb/scripts/run_nsb_tests.sh'
-        ssh -i "$PEM_FILE" "$USER@$EC2_Host" "$COMMAND"
-
-    esac
+        exit 0
+        ;;
     *)
         echo 'Invalid step'
         exit 1
