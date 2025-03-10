@@ -47,7 +47,7 @@ read -p 'Enter the number of the step you want to execute: ' step
 case $step in
   1)
     echo 'Checking prerequisites'
-    COMMAND='./check_prereqs.sh'
+    COMMAND='./scripts/check_prereqs.sh'
     ;;
   2)
     echo 'Installing NoSQLBench and Grafana/Victoria containers'
@@ -59,15 +59,15 @@ case $step in
     ;;
   4)
     echo 'Verifying Installation'
-    COMMAND='./verify_install.sh'
+    COMMAND='./scripts/verify_install.sh'
     ;;
   5)
     echo 'Set the grafana api key value'
-    COMMAND='echo "Running nsb tests"'
+    COMMAND='./scripts/set_grafana_api_key.sh'
     ;;
   6)
     echo 'Running NoSQLBench smoke tests'
-    COMMAND='echo "Running nsb tests"'
+    COMMAND='./scripts/run_smoke_tests.sh'
     ;;
   *)
     echo 'Invalid step'
