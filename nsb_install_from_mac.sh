@@ -57,11 +57,11 @@ while true; do
         ;;
     5)
         echo 'Set the grafana api key value'
-        COMMAND='./datastax_nsb/scripts/set_grafana_api_key.sh'
+        COMMAND='./datastax_nsb/scripts/set_grafana_apikey.sh'
         ;;
     6)
         echo 'Running NoSQLBench smoke tests'
-        COMMAND='./datastax_nsb/scripts/run_smoke_tests.sh'
+        COMMAND='./datastax_nsb/scripts/run_nsb_tests.sh'
         ;;
           7)
             echo 'Exiting...'
