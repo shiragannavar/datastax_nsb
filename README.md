@@ -6,6 +6,26 @@ and it's associated apps for testing of DSE (or OSS) clusters.
 
 It is designed to be run directly on an Ubuntu instance.
 
+## USAGE:
+
+The tool can be used one of two ways:
+
+### Clone repo directly to the target linux vm and run the shell:
+```
+./nsb_install_ubuntu.sh
+```
+
+### Clone repo directly to your local mac and run:
+```
+./nsb_install_from_mac.sh
+```
+
+For the local MAC run, you will need the following info:
+
+PEM_FILE='/Users/bob.hardaway/work/install/validkey.pem'
+EC2_Host='ec2-52-53-171-73.us-west-1.compute.amazonaws.com'
+USER=ubuntu
+
 ## WARNING: 
 Before executing each script, you need to provision an EC2 (or other vm) instance and
 clone this repo onto the machine. The script assumes you also add 2 nvme (Non-Volatile Memory Express) 
