@@ -27,6 +27,5 @@ else
     printf "No-SQL-Bench is not installed or not running\n"
 fi
 
-echo "Press Enter to continue..."
-read -p 
+read -p "Enter to continue " dummy
 

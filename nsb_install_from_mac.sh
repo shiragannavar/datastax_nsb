@@ -28,13 +28,15 @@ while true; do
 
     echo ''
     echo 'Which steps do you want to execute?'
+    echo ' ALL. Run through everything'
     echo ' 1. Check prerequisites'
-    echo ' 2. Install NoSQLBench and Grafana/Victoria containers'
+    echo ' 2. Install Docker - Grafana/Victoria/DSE containers'
     echo ' 3. Remount Docker home on nvme partition'
     echo ' 4. Verify Installation'
     echo ' 5. Set grafana key value'
-    echo ' 6. Run NoSQLBench smoke tests'
-    echo ' 7. Exit'
+    echo ' 6. Install NoSQLBench'
+    echo ' 7. Run NoSQLBench smoke tests'
+    echo ' 8. Exit'
     echo ''
     read -p 'Enter the number of the step you want to execute: ' step
 
@@ -60,13 +62,34 @@ while true; do
         COMMAND='./datastax_nsb/scripts/set_grafana_apikey.sh'
         ;;
     6)
+        echo 'Install NoSQLBench'
+        COMMAND='./datastax_nsb/scripts/install_nsb.sh'
+        ;;
+    7)
         echo 'Running NoSQLBench smoke tests'
         COMMAND='./datastax_nsb/scripts/run_nsb_tests.sh'
+        ;; 
+    8)
+        echo 'Exiting...'
+        exit 0
         ;;
-          7)
-            echo 'Exiting...'
-            exit 0
-            ;;
+    ALL)
+        COMMAND='./datastax_nsb/scripts/check_prereqs.sh'
+        ssh -i "$PEM_FILE" "$USER@$EC2_Host" "$COMMAND"
+        COMMAND='./datastax_nsb/scripts/docker_install.sh'
+        ssh -i "$PEM_FILE" "$USER@$EC2_Host" "$COMMAND"
+        COMMAND='./datastax_nsb/scripts/move_home.sh'
+        ssh -i "$PEM_FILE" "$USER@$EC2_Host" "$COMMAND"
+        COMMAND='./datastax_nsb/scripts/verify_install.sh'
+        ssh -i "$PEM_FILE" "$USER@$EC2_Host" "$COMMAND"
+        COMMAND='./datastax_nsb/scripts/set_grafana_apikey.sh'
+        ssh -i "$PEM_FILE" "$USER@$EC2_Host" "$COMMAND"
+        COMMAND='./datastax_nsb/scripts/install_nsb.sh'
+        ssh -i "$PEM_FILE" "$USER@$EC2_Host" "$COMMAND"
+        COMMAND='./datastax_nsb/scripts/run_nsb_tests.sh'
+        ssh -i "$PEM_FILE" "$USER@$EC2_Host" "$COMMAND"
+
+    esac
     *)
         echo 'Invalid step'
         exit 1
