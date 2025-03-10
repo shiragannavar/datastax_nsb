@@ -12,11 +12,11 @@ echo '  on a remote ubuntu instance'
 echo 'Provide connection info for the target host'
 echo ''
 read -p 'Enter the path to the PEM file: ' PEM_FILE
-read -p 'Enter the EC2 Host: ' EC2_Host
-read -p 'Enter the user: ' USER
+read -p 'Enter the EC2 Host (ec2-13-52-180-80.us-west-1.compute.amazonaws.com): ' EC2_Host
+read -p 'Enter the user (ubuntu): ' USER
 
 PEM_FILE='/Users/bob.hardaway/work/install/bobhdsedemokey.pem'
-EC2_Host='ec2-3-101-21-135.us-west-1.compute.amazonaws.com'
+EC2_Host='ec2-13-52-180-80.us-west-1.compute.amazonaws.com'
 USER=ubuntu
 
 echo 'push the install package to target host'
@@ -45,11 +45,11 @@ while true; do
         ;;
     2)
         echo 'Installing NoSQLBench and Grafana/Victoria containers'
-        COMMAND='echo "Installing"'
+        COMMAND='./datastax_nsb/scripts/docker_install.sh'
         ;;
     3)
         echo 'Remounting Docker home on nvme partition'
-        COMMAND='echo "remounting"'
+        COMMAND='./datastax_nsb/scripts/move_home.sh'
         ;;
     4)
         echo 'Verifying Installation'
