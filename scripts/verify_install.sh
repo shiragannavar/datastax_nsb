@@ -21,11 +21,12 @@ else
     printf "nvme volumes are not mounted\n"
 fi
 
-if sudo ./nb5 --list-scenarios &> /dev/null; then
+if sudo /home/ubuntu/datastax_nsb/nb5 --list-scenarios &> /dev/null; then
     printf "No-SQL-Bench is installed and running\n\n"
 else
     printf "No-SQL-Bench is not installed or not running\n"
 fi
 
-read -p "Press Enter to continue..."
+echo "Press Enter to continue..."
+read -p 
 
