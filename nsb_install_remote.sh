@@ -14,7 +14,7 @@ read -p 'Enter the user: ' USER
 
 
 
-PEM_FILE='/Users/bob.hardaway/work/poc/mc/bobh_mc_poc_key.pem'
+PEM_FILE='/Users/bob.hardaway/work/install/bobhdsedemokey.pem'
 EC2_Host='ec2-3-101-21-135.us-west-1.compute.amazonaws.com'
 USER=ubuntu
 
@@ -23,11 +23,6 @@ echo 'push the install package to target hist'
 scp -i $PEM_FILE nsb_installer.tar.gz $USER@$EC2_Host:~/
 ssh -i $PEM_FILE $USER@$EC2_Host 'tar -xvf nsb_installer.tar.gz'
 ssh -i $PEM_FILE $USER@$EC2_Host 'cd nsb_installer'
-
-
-PEM_FILE='/Users/bob.hardaway/work/poc/mc/bobh_mc_poc_key.pem'
-EC2_Host=''
-USER=ubuntu
 
 echo 'push the install package to target host'
 scp -i "$PEM_FILE" nsb_installer.tar.gz "$USER@$EC2_Host:~/"
@@ -39,7 +34,7 @@ echo ' 1. Check prerequisites'
 echo ' 2. Install NoSQLBench and Grafana/Victoria containers'
 echo ' 3. Remount Docker home on nvme partition'
 echo ' 4. Verify Installation'
-echo ' 5. Set grafana key value''
+echo ' 5. Set grafana key value'
 echo ' 6. Run NoSQLBench smoke tests'
 echo ''
 read -p 'Enter the number of the step you want to execute: ' step
@@ -116,7 +111,7 @@ COMMAND='java -version'
 
 ## run the install scripts on the target machine
 
-ssh -i $PEM_FILE $USER@$EC2_Host $COMMAND
+##ssh -i $PEM_FILE $USER@$EC2_Host $COMMAND
 
 
 
