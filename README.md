@@ -22,9 +22,11 @@ The tool can be used one of two ways:
 
 For the local MAC run, you will need the following info:
 
+```
 PEM_FILE='/Users/bob.hardaway/work/install/validkey.pem'
 EC2_Host='ec2-52-53-171-73.us-west-1.compute.amazonaws.com'
 USER=ubuntu
+```
 
 ## WARNING: 
 Before executing each script, you need to provision an EC2 (or other vm) instance and
