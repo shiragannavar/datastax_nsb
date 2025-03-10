@@ -26,3 +26,6 @@ if sudo ./nb5 --list-scenarios &> /dev/null; then
 else
     printf "No-SQL-Bench is not installed or not running\n"
 fi
+
+read -p "Press Enter to continue..."
+
