@@ -3,13 +3,13 @@
 
 printf "Verifying the environment\n\n"
 
-if sudo docker ps &> /dev/null; then
+if docker ps &> /dev/null; then
     printf "Docker is installed and running\n\n"
 else
     printf "Docker is not installed or not running\n"
 fi
 
-if sudo docker exec -it my-dse nodetool status &> /dev/null; then
+if docker exec -it my-dse nodetool status &> /dev/null; then
     printf "DSE is installed and running\n\n"
 else
     printf "DSE is not installed or not running\n"
@@ -23,7 +23,7 @@ else
     exit 1
 fi
 
-if sudo /home/ubuntu/datastax_nsb/nb5 --list-scenarios &> /dev/null; then
+if /home/ubuntu/datastax_nsb/nb5 --list-scenarios &> /dev/null; then
     printf "No-SQL-Bench is installed and running\n\n"
 else
     printf "No-SQL-Bench is not installed or not running\n"
