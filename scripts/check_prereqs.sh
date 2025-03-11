@@ -3,9 +3,9 @@
 
 printf "Verifying the environment\n\n"
 
-if df -h | grep nvme &> /dev/null; then
+if lsblk | grep nvme1n1 &> /dev/null; then
     printf "nvme volume is available\n\n"
-    df -h
+    lsblk
     echo "Hit enter to continue"
     read dummpty
 

@@ -79,7 +79,7 @@ while true; do
         COMMAND='./datastax_nsb/scripts/docker_install.sh'
         ssh -i "$PEM_FILE" "$USER@$EC2_Host" "$COMMAND"
         COMMAND='./datastax_nsb/scripts/move_home.sh'
-        ssh -i "$PEM_FILE" "$USER@$EC2_Host" "$COMMAND"ls -l
+        ssh -i "$PEM_FILE" "$USER@$EC2_Host" "$COMMAND"
         COMMAND='./datastax_nsb/scripts/install_nsb.sh'
         ssh -i "$PEM_FILE" "$USER@$EC2_Host" "$COMMAND"
         break
