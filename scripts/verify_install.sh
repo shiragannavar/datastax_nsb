@@ -13,27 +13,28 @@ if docker exec -it my-dse nodetool status &> /dev/null; then
     printf "DSE is installed and running\n\n"
 else
     printf "DSE is not installed or not running\n"
-    exit 1
 fi
 
 if df -h | grep nvme &> /dev/null; then
     printf "nvme volumes are mounted\n\n"
 else
     printf "nvme volumes are not mounted\n"
-    exit 1
 fi
 
 if /home/ubuntu/datastax_nsb/nb5 --list-scenarios &> /dev/null; then
     printf "No-SQL-Bench is installed and running\n\n"
 else
     printf "No-SQL-Bench is not installed or not running\n"
-    exit 1
 fi
 
 echo ""
-echo "Setup is complete!"
+echo "If the responses are good, setup is complete"
 echo ""
 
+echo "Hit enter to continue"
+read dummpty
+
+echo ""
 echo "Next steps - aka things you can't do in a script:"
 echo " - Open these ports 8428, 3000, 9042 on the AWS security group"
 echo " - Connect to Victoria Metric UI at http://${pub_ip}:8428 "

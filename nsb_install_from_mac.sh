@@ -16,7 +16,7 @@ read -p 'Enter the EC2 Host (ec2-13-52-180-80.us-west-1.compute.amazonaws.com): 
 read -p 'Enter the user (ubuntu): ' USER
 
 PEM_FILE='/Users/bob.hardaway/work/install/bobhdsedemokey.pem'
-EC2_Host='ec2-54-67-94-178.us-west-1.compute.amazonaws.com'
+EC2_Host='ec2-54-176-221-222.us-west-1.compute.amazonaws.com'
 USER=ubuntu
 
 if [ ! -f ".deployed" ]; then
@@ -87,7 +87,7 @@ while true; do
         ;;
     esac
 
-    ssh -t -i "$PEM_FILE" "$USER@$EC2_Host" "$COMMAND" &> /dev/null
+    ssh -t -i "$PEM_FILE" "$USER@$EC2_Host" "$COMMAND"
 done
 
 echo 'Done'
