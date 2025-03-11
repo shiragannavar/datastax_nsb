@@ -4,7 +4,48 @@
 This package allows the user to create and deploy a single node implementation of NOSQLBench
 and it's associated apps for testing of DSE (or OSS) clusters.
 
-It is designed to be run directly on an Ubuntu instance.
+The script can be execute directly from a target instance, or locally form a mac
+
+This script will install and configure a self contained single nod benchmarking environment
+ the deployment contains: 
+  - local no-sql-bench install
+  - single-node DSE docker container
+  - Victoria Metrics docker container
+  - Grafana container
+
+## 0. WARNING - Pre-requisites
+
+Before executing either script, you need to provision an EC2 (or other vm) instance and
+clone this repo onto the machine. The script assumes you add 2 nvme (Non-Volatile Memory Express) 
+volumes. From the vm, type this command to determine what volumes are available
+
+```
+lsblk
+```
+
+Look for something that looks like
+
+    nvme1n1      259:3    0    200G  0 disk
+    nvme2n1      259:4    0    100G  0 disk
+
+## 1. EC2 Provisioning
+
+### Choose an ubuntu flavor - tested with version 22.04
+
+![Ubuntu version](./img/Ubuntu2204.png)
+
+### Choose an instance type - tested with i4, must support nvme devices
+
+![Instance Type](./img/EC2_i4.png)
+
+### Create 2 addtional volumes - use io1 for optimal iops performance
+
+![io1 Volumes](./img/nvme_volumes.png)
+
+## 2. verify things went well
+```
+./install_nsb_single_node_aws_i4.sh VERIFY
+```
 
 ## USAGE:
 
@@ -28,55 +69,8 @@ EC2_Host='ec2-52-53-171-73.us-west-1.compute.amazonaws.com'
 USER=ubuntu
 ```
 
-## WARNING: 
-Before executing each script, you need to provision an EC2 (or other vm) instance and
-clone this repo onto the machine. The script assumes you also add 2 nvme (Non-Volatile Memory Express) 
-volumes. From the vm, type this command to determine what volumes are available
 
-```
-lsblk
-```
-
-Look for something that looks like
-
-    nvme1n1      259:3    0    200G  0 disk
-    nvme2n1      259:4    0    100G  0 disk
-
-This script will install and configure a self contained single nod benchmarking environment
- the deployment contains: 
-  - local no-sql-bench install
-  - single-node DSE docker container
-  - Victoria Metrics docker container
-  - Grafana container
-
-## 1. EC2 Provisioning
-
-### Choose an ubuntu flavor - tested with version 22.04
-
-![Ubuntu version](./img/Ubuntu2204.png)
-
-### Choose an instance type - tested with i4, must support nvme devices
-
-![Instance Type](./img/EC2_i4.png)
-
-### Create 2 addtional volumes - use io1 for optimal iops performance
-
-![io1 Volumes](./img/nvme_volumes.png)
-
-## 2. Setup:
-
-```
-cd datastax_nsb
-chmod +x install_nsb_single_node_aws_i4.sh
-./install_nsb_single_node_aws_i4.sh INSTALL
-```
-
-### verify things went well
-```
-./install_nsb_single_node_aws_i4.sh VERIFY
-```
-
-## 3. Steps required once script completes
+## 4. Steps required once script completes
 
  - Open ports 8428, 3000, 9042 on the AWS security group
  - Connect to Victoria Metric UI at http://<ip>:8428 
@@ -133,6 +127,8 @@ chmod +x install_nsb_single_node_aws_i4.sh
 > ./set_grafana_apikey.sh
 Enter token value:
 ```
+
+
 
 ## 4. Nosqlbench smoke tests:
 

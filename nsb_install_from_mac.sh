@@ -82,7 +82,6 @@ while true; do
         ssh -i "$PEM_FILE" "$USER@$EC2_Host" "$COMMAND"
         COMMAND='./datastax_nsb/scripts/install_nsb.sh'
         ssh -i "$PEM_FILE" "$USER@$EC2_Host" "$COMMAND"
-        break
         ;;
     *)
         echo 'Invalid entry, try again'
