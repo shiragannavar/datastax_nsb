@@ -68,7 +68,7 @@ PEM_FILE='/Users/bob.hardaway/work/install/validkey.pem'
 EC2_Host='ec2-52-53-171-73.us-west-1.compute.amazonaws.com'
 USER=ubuntu
 ```
-
+NOTE: when you first ssh to a node, there is a key check that asks do you want to continue, don't panis, this is natural.
 
 ## 4. Steps required once script completes
 
