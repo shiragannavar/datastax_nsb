@@ -23,7 +23,6 @@ if [ ! -f ".deployed" ]; then
     echo 'push the install package to target host'
     scp -i "$PEM_FILE" datastax_nsb.tar.gz "$USER@$EC2_Host:~/"
     ssh -i "$PEM_FILE" "$USER@$EC2_Host" 'tar -xvf datastax_nsb.tar.gz'
-    ssh -i "$PEM_FILE" "$USER@$EC2_Host" 'cd datastax_nsb ; ls -l'
     touch .deployed
 fi
 
@@ -87,7 +86,7 @@ while true; do
         ;;
     esac
 
-    ssh -t -i "$PEM_FILE" "$USER@$EC2_Host" "$COMMAND"
+    ssh -i "$PEM_FILE" "$USER@$EC2_Host" "$COMMAND"
 done
 
 echo 'Done'
