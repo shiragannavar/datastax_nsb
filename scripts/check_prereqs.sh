@@ -5,6 +5,7 @@ printf "Verifying the environment\n\n"
 
 if df -h | grep nvme &> /dev/null; then
     printf "nvme volume is available\n\n"
+    df -h
     echo "Hit enter to continue"
     read dummpty
 
