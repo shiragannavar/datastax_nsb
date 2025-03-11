@@ -16,19 +16,20 @@ read -p 'Enter the EC2 Host (ec2-13-52-180-80.us-west-1.compute.amazonaws.com): 
 read -p 'Enter the user (ubuntu): ' USER
 
 PEM_FILE='/Users/bob.hardaway/work/install/bobhdsedemokey.pem'
-EC2_Host='ec2-52-53-171-73.us-west-1.compute.amazonaws.com'
+EC2_Host='ec2-54-193-44-171.us-west-1.compute.amazonaws.com'
 USER=ubuntu
 
-echo 'push the install package to target host'
-scp -i "$PEM_FILE" datastax_nsb.tar.gz "$USER@$EC2_Host:~/"
-ssh -i "$PEM_FILE" "$USER@$EC2_Host" 'tar -xvf datastax_nsb.tar.gz'
-ssh -i "$PEM_FILE" "$USER@$EC2_Host" 'cd datastax_nsb ; ls -l'
+if [ ! -f ".deployed" ]; then
+    echo 'push the install package to target host'
+    scp -i "$PEM_FILE" datastax_nsb.tar.gz "$USER@$EC2_Host:~/"
+    ssh -i "$PEM_FILE" "$USER@$EC2_Host" 'tar -xvf datastax_nsb.tar.gz'
+    ssh -i "$PEM_FILE" "$USER@$EC2_Host" 'cd datastax_nsb ; ls -l'
+    touch .deployed
+fi
 
 while true; do
-
     echo ''
     echo 'Which steps do you want to execute?'
-    echo ' ALL. Run through everything'
     echo ' 1. Check prerequisites'
     echo ' 2. Install Docker - Grafana/Victoria/DSE containers'
     echo ' 3. Remount Docker home on nvme partition'
@@ -36,13 +37,14 @@ while true; do
     echo ' 5. Set grafana key value'
     echo ' 6. Install NoSQLBench'
     echo ' 7. Run NoSQLBench smoke tests'
+    echo ' ALL. Run steps 2, 3, 6'
     echo ' 8. Exit'
     echo ''
     read -p 'Enter the number of the step you want to execute: ' step
 
     case $step in
     1)
-        echo 'Checking prerequisites'
+        echo 'Checking pre-requisites'
         COMMAND='./datastax_nsb/scripts/check_prereqs.sh'
         ;;
     2)
@@ -71,7 +73,7 @@ while true; do
         ;; 
     8)
         echo 'Exiting...'
-        exit 0
+        break
         ;;
     ALL)
         COMMAND='./datastax_nsb/scripts/docker_install.sh'
@@ -80,11 +82,10 @@ while true; do
         ssh -i "$PEM_FILE" "$USER@$EC2_Host" "$COMMAND"ls -l
         COMMAND='./datastax_nsb/scripts/install_nsb.sh'
         ssh -i "$PEM_FILE" "$USER@$EC2_Host" "$COMMAND"
-        exit 0
+        break
         ;;
     *)
-        echo 'Invalid step'
-        exit 1
+        echo 'Invalid entry, try again'
         ;;
     esac
 

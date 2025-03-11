@@ -3,7 +3,7 @@
 echo ""
 echo "get nosqlbench"
 
-curl -L -output_dir "/home/ubuntu/datastax_nsb" -O https://github.com/nosqlbench/nosqlbench/releases/latest/download/nb5
+curl -L -O https://github.com/nosqlbench/nosqlbench/releases/latest/download/nb5 -output_dir "/home/ubuntu/datastax_nsb"
 chmod u+x /home/ubuntu/datastax_nsb/nb5
 
 sudo DEBIAN_FRONTEND=noninteractive add-apt-repository -y universe

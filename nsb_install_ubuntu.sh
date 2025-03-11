@@ -39,38 +39,6 @@ echo ''
 echo "The process was built and tested using an Ubuntu 22.04 LTS instance type on AWS i4.xlarge instance type."
 echo "  It should work fine on other ubuntu versions, but mileage may vary"
 
-# safety check
-if [ "$1" != "INSTALL" ]
-then
-    printf "\n"
-	printf "This is not safe unless you know what the script does. Read it first.\n\n"
-	printf "For example, the script assumes you are using an AWS i4 or similar instance that support.\n"
-    printf "  NVMe (Non-Volatile Memory Express) protocol. Make sure the instance has 2 EBS volumes \n"
-    printf " which should appear as follows (type lsblk to show all devices): \n"
-    printf "       nvme1n1      259:3    0    200G  0 disk\n"
-    printf "       nvme2n1      259:4    0    100G  0 disk\n"
-
-    printf " Check this in the AWS console before returning...\n"
-    printf " When you sure you want to continue, run the script with the argument 'INSTALL'\n\n"
-    exit 0
-fi
-
-echo ""
-echo "This script will install and configure a self contained single node benchmarking environment"
-echo " which contains: "
-echo "  - local no-sql-bench install"
-echo "  - single-node DSE docker container"
-echo "  - Victoria Metrics docker container"
-echo "  - Grafana container"
-echo ''
-echo "The configuration is an easy way to learn about NSB as a testing tool. The deployment can also be used "
-echo " for more serious DSE testing by simply NOT using the included DSE container, but wiring nsb to connect"
-echo " to any remote DSE cluster."
-echo ''
-echo "The process was built and tested using an Ubuntu 22.04 LTS instance type on AWS i4.xlarge instance type."
-echo "  It should work fine on other ubuntu versions, but mileage may vary"  
-echo ""
-
 echo "If you're ready for the adventure, hit any key to continue"
 read dummy
 
