@@ -49,8 +49,6 @@ sudo hostnamectl set-hostname "${SETHOSTNAME}"
 sudo DEBIAN_FRONTEND=noninteractive apt-get update -y
 sudo DEBIAN_FRONTEND=noninteractive apt-get upgrade -y
 
-(. ./scripts/move_home.sh)
-
 # put /var/lib/docker on nvme2n
 sudo mke2fs /dev/nvme2n1
 sudo e2label /dev/nvme2n1 docker
@@ -111,8 +109,15 @@ echo '--add-labels "instance:dsedocker"' > ./.nosqlbench/argsfile
 echo "--annotators [{'type':'log','level':'info'},{'type':'grafana','baseurl':'http://${pub_ip}:3000'}]" >> ./.nosqlbench/argsfile
 echo "--report-prompush-to http://${pub_ip}:8428/api/v1/import/prometheus/metrics/job/nosqlbench/instance/dsedocker" >> ./.nosqlbench/argsfile
 
+echo 'Log onto the Grafana UI and create an API key for the Service Account'
+echo 'then'
+echo "Enter that grafana api key you created in the UI for the Service Account:"
+read apikey
+
+echo "${apikey}" > /home/ubuntu/datastax_nsb/.nosqlbench/grafana/grafana_apikey
+
 # remount /home on nvme1n - this is done in the move_home.sh script
-## (./scripts/move_home.sh)
+(. ./scripts/move_home.sh)
 
 echo ""
 echo "Setup complete!"
