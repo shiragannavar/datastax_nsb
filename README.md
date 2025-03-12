@@ -128,8 +128,6 @@ NOTE: when you first ssh to a node, there is a key check that asks do you want t
 Enter token value:
 ```
 
-
-
 ## 4. Nosqlbench smoke tests:
 
 ```
