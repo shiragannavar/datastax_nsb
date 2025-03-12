@@ -9,7 +9,7 @@ else
     printf "Docker is not installed or not running\n"
 fi
 
-if docker exec -it my-dse nodetool status &> /dev/null; then
+if docker exec -i my-dse nodetool status &> /dev/null; then
     printf "DSE is installed and running\n\n"
 else
     printf "DSE is not installed or not running\n"
