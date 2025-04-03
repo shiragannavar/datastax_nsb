@@ -15,9 +15,9 @@ read -p 'Enter the path to the PEM file (/Users/dave/myec2key.pem): ' PEM_FILE
 read -p 'Enter the EC2 Host (ec2-13-52-180-80.us-west-1.compute.amazonaws.com): ' EC2_Host
 read -p 'Enter the user (ubuntu): ' USER
 
-PEM_FILE='/Users/bob.hardaway/work/install/bobhdsedemokey.pem'
-EC2_Host='ec2-54-193-71-43.us-west-1.compute.amazonaws.com'
-USER=ubuntu
+##PEM_FILE='/Users/bob.hardaway/work/install/bobhdsedemokey.pem'
+##EC2_Host='ec2-54-193-71-43.us-west-1.compute.amazonaws.com'
+##USER=ubuntu
 
 if [ ! -f ".deployed" ]; then
     echo 'push the install package to target host'
