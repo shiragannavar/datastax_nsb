@@ -2,18 +2,18 @@
 ## Extensions for the no-sql-bench utility
 
 This package allows the user to create and deploy a single node implementation of NOSQLBench
-and it's associated apps for testing of DSE (or OSS) clusters.
+and its associated apps for testing of DSE (or OSS) clusters.
 
-The script can be execute directly from a target instance, or locally form a mac
+The script can be executed directly from a target instance, or locally from a mac
 
 This script will install and configure a self contained single node benchmarking environment containing: 
   - local no-sql-bench install
   - Docker Containers for:
-      - single-node DSE 6.9.6 instance
-      - Victoria Metrics database
+      - A single-node DSE 6.9.6 instance
+      - Victoria Metrics database for Prometheus
       - Grafana Metrics Dashboard
 
-The instance can be used as is to get aclimated to nosqlbench. You can also change the config to point to any DSE/OSS cluster to perform more invasive testing
+The instance can be used as is to get acclimated to nosqlbench. You can also change the config to point to any DSE/OSS cluster to perform more invasive testing
 
 ## 0. WARNING - Pre-requisites
 
@@ -122,16 +122,6 @@ chmod 600 myec2key.pem
    - Import included dashboard
    - Go back to previous step to supply API Token
 
-   
-   - Connect to Victoria Metric UI at http://<ip>:8428 
-and: 
-
-   - create an service account and api token in the grafana UI - NOTE, make sure to give the SA admin rights
-      this token is added to a ~/.nosqlbench/grafana file you create
-   -  create or import included dashboard - the example dashboard is setup using 'prometheus' as the 
-       datasource name, which is the default in grafana. If you choose a different datasource name, you
-       will need to replace the name 'prometheus' in the example dashboard json file.
-
 ### Access AWS Console, navigate to your vm, click the security tab and add 3 new rules
 - Open ports 8428, 3000, 9042 on the AWS security group
 
@@ -163,7 +153,7 @@ and:
 ![Instance Type](./img/LocalIP.png)
 
 - **NOTE: Leave the default name 'prometheus'.  If you change this nb5 config must be changed!**
-- The vm port is 8428 by default
+- The vm port for Prometheus/Victoria Metrics DB is 8428 by default
 
 ![Instance Type](./img/AddPrometheusData.png)
 
@@ -174,11 +164,11 @@ and:
 
 
 ### Create a Service Account.
+- **NOTE: Make sure to select the Admin role for the account. Without this the publisher will NOT have the necessary permissions.**
 
 ![Save and Test](./img/SAAdd.png)
-![Save and Test](./img/ServiceAccountADMIN.png)
 
-  **NOTE: Make sure to select the Admin role for the account. Without this the publisher will NOT have the necessary permissions.**
+![Save and Test](./img/ServiceAccountADMIN.png)
 
 ### Create an API Token for the account. 
 - Paste this value into the terminal you left above. 
@@ -198,13 +188,9 @@ and:
 
 
 ## 8. Run the Nosqlbench smoke tests:
+- This will execute the builtin cql_starter test as well as the test included in the test.yaml file
+- Visit the grafana UI Dashboard to see stats. NOTE: It takes 30sec or more for the dashboard to update once a test is run.
+- Check the nosqlbench doc for more on test execution: https://docs.nosqlbench.io/introduction/
 
 ```
 > ./scripts/run_nsb_tests.sh
-```
-
-#### This will execute the builtin cql_starter test as well as the test included in the test.yaml file
-#### Check the nosqlbench doc for more on test execution
-
-### Visit the grafana UI Dashboard to see stats. NOTE: It takes 30sec or more for the dashboard to 
-### update once a test is run.
