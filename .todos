@@ -1,0 +1,8 @@
+## fixes and bugs to be addressed
+
+1. Grafana UI issue on chrome/datastax profile
+  - oh snap, when importing dashboard
+2. remounting home, causes problems with files created in parent shell
+3. More/better syntax example for nosqlb
+4. Docker image
+
