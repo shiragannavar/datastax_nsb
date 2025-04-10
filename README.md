@@ -2,18 +2,18 @@
 ## Extensions for the no-sql-bench utility
 
 This package allows the user to create and deploy a single node implementation of NOSQLBench
-and it's associated apps for testing of DSE (or OSS) clusters.
+and its associated apps for testing of DSE (or OSS) clusters.
 
-The script can be execute directly from a target instance, or locally form a mac
+The script can be executed directly from a target instance, or locally from a mac
 
 This script will install and configure a self contained single node benchmarking environment containing: 
   - local no-sql-bench install
   - Docker Containers for:
-      - single-node DSE 6.9.6 instance
-      - Victoria Metrics database
+      - A single-node DSE 6.9.6 instance
+      - Victoria Metrics database for Prometheus
       - Grafana Metrics Dashboard
 
-The instance can be used as is to get aclimated to nosqlbench. You can also change the config to point to any DSE/OSS cluster to perform more invasive testing
+The instance can be used as is to get acclimated to nosqlbench. You can also change the config to point to any DSE/OSS cluster to perform more invasive testing
 
 ## 0. WARNING - Pre-requisites
 
@@ -44,7 +44,7 @@ Look for something like this, indicating 2, high iops volumes are available:
 
 ### Create 2 addtional volumes - use io1 for optimal iops performance
 
-![io1 Volumes](./img/nvme_volumes.png)
+![io1 Volumes](./img/AWSConfigureStorage.png)
 
 ## 2. Deploy the instance
 
@@ -106,79 +106,91 @@ chmod 600 myec2key.pem
 ## 6. The script will prompt for:
 
  - The public dns name of your instance, you can get this in the EC2 console
- - The Grafana API key to allow data to be published to the dashboard. Stay on this prompt and continue with the following steps to generate the key
+ - The Grafana API key to allow data to be published to the dashboard. 
+   - Leave this session open at the prompt
+   - Continue with steps outlined in section 7 to generate the key
+   - Then return to this session to paste the generated key and finalize setup
+   - **NOTE:** you will need to open another connection to your ec2 instance if running on AWS
 
-## 7. Steps required once script completes
+## 7. Steps required to generate a Grafana API Key
 
-Once the script completes, you will need to finish the conf
- - Open ports 8428, 3000, 9042 on the AWS security group
- - Connect to Victoria Metric UI at http://<ip>:8428 
- - Connect to Grafana at http://<ip>:3000 and: 
-   - Create a prometheus datasource in Grafana - NOTE determine and use the private ip for the docker process:
-        - to determine that ip, use ifconfig and look for the settings for the docker0 interface. will look something like
-           - docker0: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
-           - inet 172.17.0.1  netmask 255.255.0.0  broadcast 172.17.255.255
-   - create an service account and api token in the grafana UI - NOTE, make sure to give the SA admin rights
-      this token is added to a ~/.nosqlbench/grafana file you create
-   -  create or import included dashboard - the example dashboard is setup using 'prometheus' as the 
-       datasource name, which is the default in grafana. If you choose a different datasource name, you
-       will need to replace the name 'prometheus' in the example dashboard json file.
+ - Process overview:
+   - Open ports to provide access from outside VM
+   - Access Grafana portal
+   - Create a Prometheus datasource
+   - Create a Service Account and API Token
+   - Import included dashboard
+   - Go back to previous step to supply API Token
 
 ### Access AWS Console, navigate to your vm, click the security tab and add 3 new rules
+- Open ports 8428, 3000, 9042 on the AWS security group
 
 ![Instance Type](./img/AWSSecurityGroup.png)
 ![Instance Type](./img/Add3Rules.png)
 
+### Save the Public IP Address of your ec2 Instance
+![Instance Type](./img/PublicIP.png)
+
+### Login to Grafana
+- Connect to Grafana at http://<ec2-public-ip-address>:3000 
+- Default login: admin/admin
+
+![Instance Type](./img/GrafanaLogin.png)
+
 ### Create a new Prometheus Connection
-   NOTE: Leave the default name 'prometheus' if you change this the nsb config must be changed
-   The IP here must be the local IP the Docker container is running on, you can check this by typing this command in the vm: 
+
+![Instance Type](./img/AddPrometheusConnection.png)
+
+### Create a new Prometheus Data Source
+- You need the local IP the Docker container is running on.  This can be retrieved by logging another terminal session for your ec2 instance and typing in:
    
    ```
    ifconfig
    ```
-  and look for the IP under the section docker. it should be something like: 172.17.0.1
-  the vm port is 8428 by default
 
-![Connection URL](./img/ConnectionIP.png)
+- Look for the IP under the section ``` docker0 ``` (It should be something like: 172.17.0.1)
+
+![Instance Type](./img/LocalIP.png)
+
+- **NOTE: Leave the default name 'prometheus'.  If you change this nb5 config must be changed!**
+- The vm port for Prometheus/Victoria Metrics DB is 8428 by default
+
+![Instance Type](./img/AddPrometheusData.png)
+
 
 ### Test and Save the string
 
 ![Save and Test](./img/ProSaveandTest.png)
 
+
 ### Create a Service Account.
+- **NOTE: Make sure to select the Admin role for the account. Without this the publisher will NOT have the necessary permissions.**
 
 ![Save and Test](./img/SAAdd.png)
+
 ![Save and Test](./img/ServiceAccountADMIN.png)
 
-  NOTE: Make sure to select the Admin role for the account. Without this the publisher will NOT have the necessary permissions.
-
-### Create a API Token for the account. Paste this value into the terminal you left above. NOTE you can run the set_grafana_apikey.sh script to set this value in the VM
+### Create an API Token for the account. 
+- Paste this value into the terminal you left above. 
+- *NOTE:* you can run the set_grafana_apikey.sh script to set this value in the VM if you didn't supply the key above.
 
 ![Save and Test](./img/TokenCopy.png)
 
-### Import the sample Dashboard. Import button is at the top-right in Grafana UI.
-### You may encounter a bug with import, if you do just copy/paste the json
+### Import the sample Dashboard. 
+- Import button is at the top-right in Grafana UI.
+- ``` dashboard.json ``` is in the root of this repo.
+- **TIP: You may encounter a bug with import, if you do just copy/paste the json.**
 
 ![Save and Test](./img/DashUpload.png)
 ![Save and Test](./img/DashImportRight.png)
 ![Save and Test](./img/AwSnap.png)
 ![Save and Test](./img/DashImport.png)
 
-### Run the helper script and enter the api key generated in grafana 
 
-```
-> ./set_grafana_apikey.sh
-Enter token value:
-```
-
-## 4. Nosqlbench smoke tests:
+## 8. Run the Nosqlbench smoke tests:
+- This will execute the builtin cql_starter test as well as the test included in the test.yaml file
+- Visit the grafana UI Dashboard to see stats. NOTE: It takes 30sec or more for the dashboard to update once a test is run.
+- Check the nosqlbench doc for more on test execution: https://docs.nosqlbench.io/introduction/
 
 ```
 > ./scripts/run_nsb_tests.sh
-```
-
-#### This will execute the builtin cql_starter test as well as the test included in the test.yaml file
-#### Check the nosqlbench doc for more on test execution
-
-### Visit the grafana UI Dashboard to see stats. NOTE: It takes 30sec or more for the dashboard to 
-### update once a test is run.
